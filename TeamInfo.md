@@ -6,9 +6,9 @@
 | ----------- | ---------------------- |
 | TeamID      |        Team-023        |
 | TeamName    |        YXYZ            |
-| Captain     |       Zihan Li     |
+| Captain     |       Zihan Li         |
 | Captain     |   zihanl19@illinois.edu |
-| Member1     |       Yixuan Li      |
+| Member1     |       Yixuan Li          |
 | Member1     |    yixuan19@illinois.edu   |
 | Member2     |        Xuanming Zhang      |
 | Member2     |   xz130@illinois.edu  |
