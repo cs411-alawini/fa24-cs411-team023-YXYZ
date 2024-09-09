@@ -12,7 +12,7 @@
 | Member1     |    yixuan19@illinois.edu   |
 | Member2     |        Xuanming Zhang      |
 | Member2     |   xz130@illinois.edu  |
-| Member3     |        Yating Bai        |
+| Member3     |        Yating Pai        |
 | Member3     |   yatingp2@illinois.edu  |
 
 ## Project Information
