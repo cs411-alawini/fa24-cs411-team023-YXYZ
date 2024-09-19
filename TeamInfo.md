@@ -19,10 +19,10 @@
 
 |   Info      |        Description     |
 | ----------- | ---------------------- |
-|  Title      |       ProjectTitle     |
+|  Title      |       EcoVista: Interactive Environmental Insights Map     |
 | System URL  |      link_to_system    |
 | Video Link  |      link_to_video     |
 
 ## Project Summary
 
-This is a summary of the project!
+EcoVista is a web-based application that provides users with a platform for visualizing and analyzing various environmental datasets, such as drought monitoring, air pollution. EcoVista features an interactive map interface that allows users to explore environmental data by updating the map colors based on the selected environmental data. The application also provides advanced query capabilities to search for specific data for a specific city or region, and a ranking system to evaluate and compare environmental quality indicators in different locations.
