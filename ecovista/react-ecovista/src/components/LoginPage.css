@@ -1,0 +1,133 @@
+/* 使整个页面居中对齐 */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../..//public/homebackground.png'); /* 确保路径正确 */
+    background-size: cover;
+    background-position: center;
+}
+
+/* 登录框样式 */
+.login-box {
+    background-color: #40444b;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 320px;
+}
+
+ /* 背景图片样式 */
+ .background-image {
+    position: absolute; /* 使用绝对定位确保图片始终位于背景 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 图片覆盖整个容器，不失真 */
+  }
+
+/* 标题样式 */
+.login-box h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* 社交登录按钮样式 */
+.social-login button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 动态效果 */
+}
+
+.social-login button:hover {
+    transform: scale(1.05); /* 鼠标移入时缩放效果 */
+}
+
+.social-login button.facebook {
+    background-color: #4267B2;
+}
+
+.social-login button.google {
+    background-color: #DB4437;
+}
+
+.social-login button i {
+    margin-right: 10px;
+}
+
+/* 输入框样式 */
+.email-login input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #3f4145;
+    color: #ffffff;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* 动态效果 */
+}
+
+.email-login input:focus {
+    background-color: #484b51;
+    border-color: #7289da; /* 焦点时改变边框颜色 */
+    outline: none;
+}
+
+/* 输入框的提示文本颜色 */
+.email-login input::placeholder {
+    color: #b9bbbe;
+}
+
+/* 按钮居中并带有动态效果 */
+.login-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.login-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7289da;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* 动态效果 */
+    flex: 1;
+    margin: 0 5px;
+}
+
+.login-actions button:hover {
+    background-color: #5a70b3;
+    transform: scale(1.05); /* 鼠标移入时缩放效果 */
+}
+
+/* 注册按钮样式 */
+.login-actions button.sign-up {
+    background-color: transparent;
+    color: #7289da;
+    border: 1px solid #7289da;
+}
+
+.login-actions button.sign-up:hover {
+    background-color: #7289da;
+    color: #ffffff;
+}
