@@ -1,0 +1,156 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+
+  .info-app {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+  
+
+  .background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+
+  .info-search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .info-search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px;
+  }
+  
+  .info-clear-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  
+  .info-search-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .info-search-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .info-result-header {
+    background-color: #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  
+  .info-tab-navigation {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .info-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .info-tab.active {
+    background-color: #ccc;
+    font-weight: bold;
+  }
+  
+  .info-tab:hover {
+    background-color: #d9d9d9;
+  }
+  
+  .info-map {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  
+  .info-map img {
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .info-tooltip {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .info-ranking-section {
+    margin-bottom: 20px;
+  }
+  
+  .info-ranking-section h2 {
+    margin-bottom: 10px;
+  }
+  
+  .info-filters {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .info-filters label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+  }
+  
+  .info-result-table {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }
+  
