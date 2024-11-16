@@ -37,10 +37,10 @@ async def register_user(request: RegisterRequest):
     cursor = None
     try:
         connection = pymysql.connect(
-            host='34.173.41.58',
-            user='test',
-            password='yxyz',
-            database='EcoVista'
+            host=db_config['host'],
+            user=db_config['user'],
+            password=db_config['password'],
+            database=db_config['database']
         )
         print("成功连接到数据库")
         with connection.cursor() as cursor:
