@@ -1,22 +1,15 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 import pymysql
-import os
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import APIRouter
+from utils import db_config
 
 load_dotenv()
 
 router = APIRouter()
 
-# MySQL Database Connection Configuration
-db_config = {
-    'host': os.getenv('DB_HOST'),  
-    'user': os.getenv('DB_USER'),
-    'password': os.getenv('DB_PASSWORD'),
-    'database': os.getenv('DB_NAME'),
-}
 
 # model for request body
 class RegisterRequest(BaseModel):
@@ -67,10 +60,10 @@ async def register_user(request: Login):
     cursor = None
     try:
         connection = pymysql.connect(
-            host='34.173.41.58',
-            user='test',
-            password='yxyz',
-            database='EcoVista'
+            host=db_config['host'],
+            user=db_config['user'],
+            password=db_config['password'],
+            database=db_config['database']
         )
         print("成功连接到数据库")
         cursor = connection.cursor(pymysql.cursors.DictCursor)

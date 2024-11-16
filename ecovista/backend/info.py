@@ -3,10 +3,10 @@ from fastapi import APIRouter
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 import pymysql
-import os
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import APIRouter
+from utils import db_config
 
 router = APIRouter()
 table_name_map = {
@@ -39,10 +39,10 @@ async def filter(
         print(table_name)
 
         connection = pymysql.connect(
-            host='34.173.41.58',
-            user='test',
-            password='yxyz',
-            database='EcoVista'
+            host=db_config['host'],
+            user=db_config['user'],
+            password=db_config['password'],
+            database=db_config['database']
         )
         print("成功连接到数据库")
 
