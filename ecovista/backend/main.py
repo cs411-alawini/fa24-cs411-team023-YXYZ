@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from signUp import router as signup_router
-from info import router as info_router
+from ecovista.backend.routers.signUp import router as signup_router
+from ecovista.backend.routers.info import router as info_router
 
 
 app = FastAPI()
