@@ -1,5 +1,8 @@
 import os
+from dotenv import load_dotenv
 
+# Load the .env file
+load_dotenv()
 # MySQL Database Connection Configuration
 db_config = {
     "host": os.getenv("DB_HOST"),
@@ -7,3 +10,4 @@ db_config = {
     "password": os.getenv("DB_PASSWORD"),
     "database": os.getenv("DB_NAME"),
 }
+print(db_config)
