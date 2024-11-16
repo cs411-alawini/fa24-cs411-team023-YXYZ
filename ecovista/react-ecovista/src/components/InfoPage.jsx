@@ -11,7 +11,7 @@ function InfoPage() {
         <img src="/homebackground.png" alt="Culinary Background" className="background-image" />
       </div>
       <div className="info-search-bar">
-        <input type="text" placeholder="Search for city or region" />
+        <input type="text" placeholder="Search for county(with county code) or State" />
         <button className="info-clear-btn">✖</button>
         <button className="info-search-btn">Search</button>
       </div>

@@ -4,19 +4,11 @@ import pymysql
 import os
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import APIRouter
 
 load_dotenv()
 
-app = FastAPI()
-
-# Add CORS middleware to allow the frontend to communicate with the backend
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"], 
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+router = APIRouter()
 
 # MySQL Database Connection Configuration
 db_config = {
@@ -38,7 +30,7 @@ class Login(BaseModel):
     password: str
 
 # SignUp Endpoint
-@app.post('/register', status_code=status.HTTP_201_CREATED)
+@router.post('/register', status_code=status.HTTP_201_CREATED)
 async def register_user(request: RegisterRequest):
     # print(request)
     connection = None
@@ -68,7 +60,7 @@ async def register_user(request: RegisterRequest):
 
 
 # Login Endpoint
-@app.post('/login', status_code=status.HTTP_201_CREATED)
+@router.post('/login', status_code=status.HTTP_201_CREATED)
 async def register_user(request: Login):
     print(request)
     connection = None
