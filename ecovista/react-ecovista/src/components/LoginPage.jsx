@@ -19,10 +19,10 @@ const LoginPage = () => {
         console.log('Login response:', response.data);
 
         if (response.data.success) {
-            const { chat_history, nickname, user_id } = response.data;
+            const { user_county_code, nickname, user_id } = response.data;
 
-            console.log('Navigating to chat with:', chat_history, nickname);
-            navigate('/chat', { state: { chatHistory: chat_history, nickname, user_id } });
+            console.log('Navigating to chat with:', user_county_code, nickname);
+            navigate('/info', { state: { user_county_code, nickname, user_id } });
         } else {
             alert('Invalid credentials');
         }
