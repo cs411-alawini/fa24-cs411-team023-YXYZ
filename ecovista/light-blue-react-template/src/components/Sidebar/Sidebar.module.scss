@@ -2,18 +2,26 @@
 
 .root {
   width: $sidebar-width-open;
-  position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  overflow-y: auto;
   background-color: $sidebar-bg-color;
   background: transparent;
-  color: $sidebar-color;
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex; /* Flex container */
+  flex-direction: column; /* Align items vertically */
   margin-left: 15px;
   transition: height 1s;
-  transform: translateX(-$sidebar-width-open);
-
+  // transform: translateX(-$sidebar-width-open);
+  color: white; /* Text color */
+  position: fixed; /* Fix to the left of the screen */
+  // z-index: 10; /* Ensure it stays above other content */
+  z-index: 1000;
+    
+  // When sidebar is open
+  &.sidebarOpen {
+      transform: translateX(0);
+  }
   @media print {
     display: none;
   }
@@ -223,4 +231,8 @@
 
 .menuIcon {
   fill: $icon-color;
+}
+
+.nav li:hover {
+  background-color: #282846; /* Highlight on hover */
 }

@@ -20,71 +20,79 @@ class Register extends React.Component {
         this.state = {
             email: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            county_code: '',
         };
-
+        
         this.doRegister = this.doRegister.bind(this);
-        this.changeEmail = this.changeEmail.bind(this);
-        this.changePassword = this.changePassword.bind(this);
-        this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
-        this.checkPassword = this.checkPassword.bind(this);
-        this.isPasswordValid = this.isPasswordValid.bind(this);
+        // this.changeEmail = this.changeEmail.bind(this);
+        // this.changePassword = this.changePassword.bind(this);
+        // this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
+        // this.checkPassword = this.checkPassword.bind(this);
+        // this.isPasswordValid = this.isPasswordValid.bind(this);
     }
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    };
+    // changeEmail(event) {
+    //     this.setState({email: event.target.value});
+    // }
 
-    changeEmail(event) {
-        this.setState({email: event.target.value});
-    }
+    // changePassword(event) {
+    //     this.setState({password: event.target.value});
+    // }
+    
+    // changeCountyCode(event) {
+    //     this.setState({county_code: event.target.value});
+    // }
 
-    changePassword(event) {
-        this.setState({password: event.target.value});
-    }
+    // changeConfirmPassword(event) {
+    //     this.setState({confirmPassword: event.target.value});
+    // }
 
-    changeConfirmPassword(event) {
-        this.setState({confirmPassword: event.target.value});
-    }
+    // checkPassword() {
+    //     if (!this.isPasswordValid()) {
+    //         if (!this.state.password) {
+    //             this.props.dispatch(registerError("Password field is empty"));
+    //         } else {
+    //             this.props.dispatch(registerError("Passwords are not equal"));
+    //         }
+    //         setTimeout(() => {
+    //             this.props.dispatch(registerError());
+    //         }, 3 * 1000)
+    //     }
+    // }
 
-    checkPassword() {
-        if (!this.isPasswordValid()) {
-            if (!this.state.password) {
-                this.props.dispatch(registerError("Password field is empty"));
-            } else {
-                this.props.dispatch(registerError("Passwords are not equal"));
-            }
-            setTimeout(() => {
-                this.props.dispatch(registerError());
-            }, 3 * 1000)
-        }
-    }
-
-    isPasswordValid() {
-       return this.state.password && this.state.password === this.state.confirmPassword;
-    }
+    // isPasswordValid() {
+    //    return this.state.password && this.state.password === this.state.confirmPassword;
+    // }
 
     doRegister(e) {
         e.preventDefault();
-        if (!this.isPasswordValid()) {
-            this.checkPassword();
-        } else {
-            const { email, password } = this.state;
 
-            axios
-                .post("http://localhost:10000/register", { email, password })
-                .then((response) => {
-                    alert("Registration successful!");
-                    this.props.history.push("/login"); // Redirect to login page
-                })
-                .catch((error) => {
-                    const errorMessage = error.response?.data?.detail || "An error occurred. Please try again.";
-                    this.props.dispatch(registerError(errorMessage));
-                });
-            // this.props.dispatch(registerUser({
-            //     creds: {
-            //         email: this.state.email,
-            //         password: this.state.password
-            //     },
-            //     history: this.props.history
-            // }));
-        }
+        const { email, password, county_code } = this.state;
+        const nickname = email.split('@')[0];
+
+        axios
+            .post("http://localhost:10000/register", { email, nickname, county_code, password })
+            .then((response) => {
+                alert("Registration successful!");
+                this.props.history.push("/login");
+            })
+            .catch((error) => {
+                let errorMessage = "An error occurred. Please try again.";
+
+                if (error.response?.data) {
+                    if (typeof error.response.data === "object") {
+                        errorMessage = error.response.data.msg || JSON.stringify(error.response.data);
+                    } else {
+                        errorMessage = error.response.data;
+                    }
+                }
+
+                this.setState({ error: errorMessage });
+            });
     }
 
     render() {
@@ -121,7 +129,7 @@ class Register extends React.Component {
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input id="email" className="input-transparent pl-3" value={this.state.email}
-                                           onChange={this.changeEmail} type="email"
+                                           onChange={this.handleInputChange} type="email"
                                            required name="email" placeholder="Email"/>
                                 </InputGroup>
                             </FormGroup>
@@ -134,7 +142,7 @@ class Register extends React.Component {
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input id="password" className="input-transparent pl-3" value={this.state.password}
-                                           onChange={this.changePassword} type="password"
+                                           onChange={this.handleInputChange} type="password"
                                            required name="password" placeholder="Password"/>
                                 </InputGroup>
                             </FormGroup>
@@ -147,8 +155,21 @@ class Register extends React.Component {
                                         </InputGroupText>
                                     </InputGroupAddon>
                                     <Input id="confirmPassword" className="input-transparent pl-3" value={this.state.confirmPassword}
-                                           onChange={this.changeConfirmPassword} onBlur={this.checkPassword} type="password"
+                                           onChange={this.handleInputChange} onBlur={this.checkPassword} type="password"
                                            required name="confirmPassword" placeholder="Confirm"/>
+                                </InputGroup>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="county_code">county_code</Label>
+                                <InputGroup className="input-group-no-border">
+                                    <InputGroupAddon addonType="prepend">
+                                        <InputGroupText>
+                                            <i className="la la-lock text-white"/>
+                                        </InputGroupText>
+                                    </InputGroupAddon>
+                                    <Input id="county_code" className="input-transparent pl-3" value={this.state.county_code}
+                                           onChange={this.handleInputChange} type="county_code"
+                                           required name="county_code" placeholder="county_code"/>
                                 </InputGroup>
                             </FormGroup>
                             <div className="bg-widget-transparent auth-widget-footer">

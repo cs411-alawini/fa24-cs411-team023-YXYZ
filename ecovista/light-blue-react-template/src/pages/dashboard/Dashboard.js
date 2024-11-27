@@ -56,17 +56,10 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <h1 className="page-title">
-          EcoVista &nbsp;
-          {/* <small>
-            <small>The Lucky One</small>
-          </small> */}
-        </h1>
-
         <Row>
           <Col lg={7}>
             <Widget className="bg-transparent">
-              <Map key={Date.now()} />
+              <Map />
             </Widget>
           </Col>
           <Col lg={1} />
@@ -184,7 +177,7 @@ class Dashboard extends React.Component {
         </Row>
 
         <Row>
-          <Col lg={6} xl={4} xs={12}>
+          <Col lg={6} xl={6} xs={12}>
             <Widget title={<h6> USERBASE GROWTH </h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">
@@ -216,7 +209,7 @@ class Dashboard extends React.Component {
               </p>
             </Widget>
           </Col>
-          <Col lg={6} xl={4} xs={12}>
+          <Col lg={6} xl={6} xs={12}>
             <Widget title={<h6> TRAFFIC VALUES </h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">
@@ -248,7 +241,10 @@ class Dashboard extends React.Component {
               </p>
             </Widget>
           </Col>
-          <Col lg={6} xl={4} xs={12}>
+        </Row>
+
+        <Row>
+        <Col lg={6} xl={6} xs={12}>
             <Widget title={<h6> RANDOM VALUES </h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">
@@ -280,10 +276,7 @@ class Dashboard extends React.Component {
               </p>
             </Widget>
           </Col>
-        </Row>
-
-        <Row>
-          <Col lg={4} xs={12}>
+          <Col lg={6} xl={6} xs={12}>
             <Widget
               title={
                 <h6>
@@ -368,117 +361,6 @@ class Dashboard extends React.Component {
                   placeholder="Search"
                 />
               </footer>
-            </Widget>
-          </Col>
-
-          <Col lg={4} xs={12}>
-            <Widget
-              title={
-                <h6>
-                  {" "}
-                  Market <span className="fw-semi-bold">Stats</span>
-                </h6>
-              }
-              close
-            >
-              <div className="widget-body">
-                <h3>$720 Earned</h3>
-                <p className="fs-mini text-muted mb mt-sm">
-                  Target <span className="fw-semi-bold">$820</span> day earnings
-                  is <span className="fw-semi-bold">96%</span> reached.
-                </p>
-              </div>
-              <div className={`widget-table-overflow ${s.table}`}>
-                <Table striped size="sm">
-                  <thead className="no-bd">
-                    <tr>
-                      <th>
-                        <div className="checkbox abc-checkbox">
-                          <Input
-                            className="mt-0"
-                            id="checkbox210"
-                            type="checkbox"
-                            onClick={() => this.checkTable(0)}
-                            checked={this.state.checkedArr[0]}
-                            readOnly
-                          />{" "}
-                          <Label for="checkbox210" />
-                        </div>
-                      </th>
-                      <th>&nbsp;</th>
-                      <th>&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div className="checkbox abc-checkbox">
-                          <Input
-                            className="mt-0"
-                            id="checkbox212"
-                            type="checkbox"
-                            onClick={() => this.checkTable(1)}
-                            checked={this.state.checkedArr[1]}
-                            readOnly
-                          />{" "}
-                          <Label for="checkbox212" />
-                        </div>
-                      </td>
-                      <td>HP Core i7</td>
-                      <td className="text-align-right fw-semi-bold">$346.1</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="checkbox abc-checkbox">
-                          <Input
-                            className="mt-0"
-                            id="checkbox214"
-                            onClick={() => this.checkTable(2)}
-                            type="checkbox"
-                            checked={this.state.checkedArr[2]}
-                            readOnly
-                          />{" "}
-                          <Label for="checkbox214" />
-                        </div>
-                      </td>
-                      <td>Air Pro</td>
-                      <td className="text-align-right fw-semi-bold">$533.1</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
-
-              <div
-                className="widget-body mt-xlg chart-overflow-bottom"
-                style={{ height: "100px" }}
-              >
-                <Rickshaw height={100} />
-              </div>
-            </Widget>
-          </Col>
-
-          <Col lg={4} xs={12}>
-            <Widget
-              title={<h6>Calendar</h6>}
-              settings
-              close
-              bodyClass={"pt-2 px-0 py-0"}
-            >
-              <Calendar />
-              <div className="list-group fs-mini">
-                <button className="list-group-item text-ellipsis">
-                  <span className="badge badge-pill badge-primary float-right">
-                    6:45
-                  </span>
-                  Weed out the flower bed
-                </button>
-                <button className="list-group-item text-ellipsis">
-                  <span className="badge badge-pill badge-success float-right">
-                    9:41
-                  </span>
-                  Stop world water pollution
-                </button>
-              </div>
             </Widget>
           </Col>
         </Row>

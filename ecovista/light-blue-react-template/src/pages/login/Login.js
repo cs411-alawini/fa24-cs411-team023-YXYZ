@@ -71,7 +71,7 @@ class Login extends React.Component {
     }
 
     render() {
-        const { from } = this.props.location.state || { from: { pathname: '/app' } }; // eslint-disable-line
+        const { from } = this.props.location.state || { from: { pathname: '/dashboard' } }; // eslint-disable-line
 
         // cant access login page while logged in
         if (Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {

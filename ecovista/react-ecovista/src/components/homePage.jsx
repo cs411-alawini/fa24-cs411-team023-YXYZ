@@ -14,7 +14,7 @@ function Home() {
         <p className="description">
         EcoVista is a web-based application that provides users with a platform for visualization and analyzing various environmental databases.
         </p>
-        <button onClick={() => { window.location.href = '/login'; }} className="welcome-create-chat-btn">
+        <button onClick={() => { window.location.href = '/login'; }} className="start-button">
               Get Started
                 {/* <FontAwesomeIcon icon={faPlus} style={{ marginRight: '10px' }} /> Get Started */}
         </button>

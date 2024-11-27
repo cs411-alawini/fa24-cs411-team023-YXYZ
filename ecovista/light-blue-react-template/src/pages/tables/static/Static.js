@@ -284,9 +284,9 @@ class Static extends React.Component {
               </div> */}
               <br />
               <br />
-              <h3>
+              {/* <h3>
                 Hover <span className="fw-semi-bold">Table</span>
-              </h3>
+              </h3> */}
               <p>
                 {"Trace only what's really important. "}
                 <code>.table-hover</code> is made for it.

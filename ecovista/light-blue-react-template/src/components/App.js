@@ -10,11 +10,13 @@ import ErrorPage from '../pages/error';
 /* eslint-enable */
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-
+import Layout from './Layout';
 import '../styles/theme.scss';
-import LayoutComponent from '../components/Layout';
+import LayoutComponent from './Layout';
 import Login from '../pages/login';
 import Register from '../pages/register';
+import Tables from '../pages/tables/static/Static';
+import Dashboard from '../pages/dashboard/Dashboard';
 import { logoutUser } from '../actions/user';
 
 const PrivateRoute = ({dispatch, component, ...rest }) => {
@@ -41,15 +43,53 @@ class App extends React.PureComponent {
             />
     <Router>
     <Switch>
+                    {/* Public Routes - These should come first */}
                     <Route exact path="/" component={HomePage} />
-                    <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
-                    <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/login" exact component={Login}/>
-                    <Route path="/error" exact component={ErrorPage}/>
-                    <Route component={ErrorPage}/>
-                    <Redirect from="*" to="/app/main/dashboard"/>
-                    </Switch>
+                    <Route path="/login" exact component={Login} />
+                    <Route path="/register" exact component={Register} />
+                    <Route path="/error" exact component={ErrorPage} />
+                    <Route path="/app/tables" exact component={Tables} />
+                    {/* Protected Routes - Using a more specific structure */}
+                    {/* <Route 
+                        path="/app/tables"
+                        render={(props) => (
+                            <Layout>
+                                <Tables {...props} />
+                            </Layout>
+                        )}
+                    /> */}
+
+                    <Route 
+                        path="/dashboard" 
+                        render={(props) => (
+                            <Layout>
+                                <Dashboard {...props} />
+                            </Layout>
+                        )}
+                    />
+
+                    <Route 
+                        path="/tables" 
+                        render={(props) => (
+                            <Layout>
+                                <Tables {...props} />
+                            </Layout>
+                        )}
+                    />
+
+                    <Route 
+                        path="/app"
+                        render={(props) => (
+                            <Layout>
+                                <Switch>
+                                    <Route path="/tables" component={Tables} />
+                                    <Redirect to="/login" />
+                                </Switch>
+                            </Layout>
+                        )}
+                    /> 
+                    <Redirect to="/error" />
+                </Switch>
             </Router>
         </div>
 

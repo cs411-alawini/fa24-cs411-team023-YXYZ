@@ -11,13 +11,14 @@ import TablesStatic from '../../pages/tables/static';
 import MapsGoogle from '../../pages/components/maps/google';
 import CoreTypography from '../../pages/typography';
 // import Charts from '../../pages/components/charts/Charts';
-import Dashboard from '../../pages/dashboard';
 
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import BreadcrumbHistory from '../BreadcrumbHistory';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import s from './Layout.module.scss';
+import Dashboard from '../../pages/dashboard/Dashboard';
+import ErrorPage from '../../pages/error/ErrorPage';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -55,18 +56,13 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <div
-        className={[
-          s.root,
-          'sidebar-' + this.props.sidebarPosition,
-          'sidebar-' + this.props.sidebarVisibility,
-        ].join(' ')}
-      >
+      <div className={s.root}>
+        {/* Sidebar */}
+        <Sidebar />
+
         <div className={s.wrap}>
+          {/* Header */}
           <Header />
-          {/* <Chat chatOpen={this.state.chatOpen} /> */}
-          {/* <Helper /> */}
-          <Sidebar />
           <Hammer onSwipe={this.handleSwipe}>
             <main className={s.content}>
               <BreadcrumbHistory url={this.props.location.pathname} />
@@ -77,20 +73,22 @@ class Layout extends React.Component {
                   timeout={200}
                 >
                   <Switch>
-                    <Route path="/app/main" exact render={() => <Redirect to="/app/main/dashboard" />} />
-                    <Route path="/app/main/dashboard" exact component={Dashboard} />
-                    <Route path="/app/components/icons" exact component={UIIcons} />
-                    <Route path="/app/notifications" exact component={UINotifications} />
+            {/* Redirect base path to Dashboard */}
+                    <Route path="/dashboard" exact component={Dashboard} />
+                    <Redirect from="/app" to="/dashboard" />
+                    <Route component={ErrorPage} />
+                    {/* <Route path="/app/components/icons" exact component={UIIcons} /> */}
+                    {/* <Route path="/app/notifications" exact component={UINotifications} /> */}
                     {/* <Route path="/app/components/charts" exact component={Charts} /> */}
                     <Route path="/app/tables" exact component={TablesStatic} />
-                    <Route path="/app/components/maps" exact component={MapsGoogle} />
-                    <Route path="/app/typography" exact component={CoreTypography} />
+                    {/* <Route path="/app/components/maps" exact component={MapsGoogle} />
+                    <Route path="/app/typography" exact component={CoreTypography} /> */}
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>
-              <footer className={s.contentFooter}>
+              {/* <footer className={s.contentFooter}>
                 Light Blue React Template - React admin template made by <a href="https://flatlogic.com" >Flatlogic</a>
-              </footer>
+              </footer> */}
             </main>
           </Hammer>
         </div>

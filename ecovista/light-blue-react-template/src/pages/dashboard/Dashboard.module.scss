@@ -1,5 +1,8 @@
 @import '../../styles/app';
-
+.content {
+  border: 2px solid red; /* Add a red border for visibility */
+  min-height: 500px; /* Ensure it has a height */
+}
 .root {
   :global {
     .post-comments footer {

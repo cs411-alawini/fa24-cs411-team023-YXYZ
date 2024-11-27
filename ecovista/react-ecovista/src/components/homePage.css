@@ -18,14 +18,17 @@ html, body {
   
   /* 背景图片样式 */
   .background-image {
-    position: absolute; /* 使用绝对定位确保图片始终位于背景 */
-    top: 0;
-    left: 0;
+    /* position: absolute; /* 使用绝对定位确保图片始终位于背景 */
+    /* top: 0;
+    left: 0; */ 
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 图片覆盖整个容器，不失真 */
+    /* object-fit: cover; 图片覆盖整个容器，不失真 */
   }
-  
+  .background {
+  width: 100%;
+  height: 100%;
+  }
   /* 面板样式 */
   .panel {
     position: absolute;

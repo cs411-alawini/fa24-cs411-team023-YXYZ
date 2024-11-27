@@ -104,7 +104,7 @@ class Sidebar extends React.Component {
                     <LinksGroup
                         onActiveSidebarItemChange={t => this.props.dispatch(changeActiveSidebarItem(t))}
                         activeItem={this.props.activeItem}
-                        header="Search By State"
+                        header="Advanced Search"
                         isHeader
                         iconName={<TablesIcon className={s.menuIcon} />}
                         link="/app/tables"
@@ -193,6 +193,7 @@ class Sidebar extends React.Component {
 }
 
 function mapStateToProps(store) {
+    console.log('Sidebar State:', store.navigation.sidebarOpened);
     return {
         sidebarOpened: store.navigation.sidebarOpened,
         sidebarStatic: store.navigation.sidebarStatic,

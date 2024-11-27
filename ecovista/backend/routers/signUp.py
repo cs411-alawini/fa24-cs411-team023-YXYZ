@@ -27,10 +27,11 @@ class Login(BaseModel):
 # SignUp Endpoint
 @router.post("/register", status_code=status.HTTP_201_CREATED)
 async def register_user(request: RegisterRequest):
-    # print(request)
+    print(request)
     connection = None
     cursor = None
     try:
+        print("!!!!!equest")
         connection = pymysql.connect(
             host=db_config["host"],
             user=db_config["user"],
