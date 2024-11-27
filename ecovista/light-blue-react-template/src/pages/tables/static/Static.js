@@ -172,112 +172,7 @@ class Static extends React.Component {
           </Form>
         <Row>
           <Col lg={6} md={12} sm={12}>
-            <Widget
-              title={
-                <h5>
-                  Table <span className="fw-semi-bold">Styles</span>
-                </h5>
-              }
-              settings
-              close
-              bodyClass={s.mainTableWidget}
-            >
-            <div className={s.overFlow}>
-              <Table lg={12} md={12} sm={12} striped>
-                <thead>
-                  <tr className="fs-sm">
-                    <th className="hidden-sm-down">#</th>
-                    <th>Picture</th>
-                    <th>Description</th>
-                    <th className="hidden-sm-down">Info</th>
-                    <th className="hidden-sm-down">Date</th>
-                    <th className="hidden-sm-down">Size</th>
-                    <th className="hidden-sm-down">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.tableStyles.map((row) => (
-                    <tr key={row.id}>
-                      <td>{row.id}</td>
-                      <td>
-                        <img
-                          className="img-rounded"
-                          src={row.picture}
-                          alt=""
-                          height="50"
-                        />
-                      </td>
-                      <td>
-                        {row.description}
-                        {row.label && (
-                          <div>
-                            <Badge color={row.label.colorClass}>
-                              {row.label.text}
-                            </Badge>
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        <p className="mb-0">
-                          <small>
-                            Type:
-                            <span className="text-muted fw-semi-bold">
-                              &nbsp; {row.info.type}
-                            </span>
-                          </small>
-                        </p>
-                        <p>
-                          <small>
-                            Dimensions:
-                            <span className="text-muted fw-semi-bold">
-                              &nbsp; {row.info.dimensions}
-                            </span>
-                          </small>
-                        </p>
-                      </td>
-                      <td className="text-muted">{this.parseDate(row.date)}</td>
-                      <td className="text-muted">{row.size}</td>
-                      <td className="width-150">
-                        <Progress
-                          color={row.progress.colorClass}
-                          value={row.progress.percent}
-                          className="progress-sm mb-xs"
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </div>
-              <div className="clearfix">
-                <div className="float-right">
-                  <Button color="default" className="mr-2" size="sm">
-                    Send to...
-                  </Button>
-                  <UncontrolledButtonDropdown>
-                    <DropdownToggle
-                      color="inverse"
-                      className="mr-xs"
-                      size="sm"
-                      caret
-                    >
-                      Clear
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem>Clear</DropdownItem>
-                      <DropdownItem>Move ...</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                      <DropdownItem divider />
-                      <DropdownItem>Separated link</DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledButtonDropdown>
-                </div>
-                <p>Basic table with styled content</p>
-              </div>
-            </Widget>
-          </Col>
-          <Col lg={6} md={12} sm={12}>
-            <Widget
+            {/* <Widget
               title={
                 <h5>
                   Table <span className="fw-semi-bold">Styles</span>
@@ -386,7 +281,7 @@ class Static extends React.Component {
                   </tr>
                 </tbody>
               </Table>
-              </div>
+              </div> */}
               <br />
               <br />
               <h3>
@@ -465,11 +360,11 @@ class Static extends React.Component {
                   {/* eslint-enable */}
                 </Table>
                 </div>
-            </Widget>
+            {/* </Widget> */}
           </Col>
         </Row>
         <Row> 
-          <Col lg={6} md={6} sm={12}>
+          {/* <Col lg={6} md={6} sm={12}>
             <Widget
               // title={
               //   <h5>
@@ -812,7 +707,7 @@ class Static extends React.Component {
                 </Table>
               </div>
             </Widget>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     );
