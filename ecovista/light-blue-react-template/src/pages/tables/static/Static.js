@@ -150,9 +150,9 @@ class Static extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <h2 className="page-title">
+        {/* <h2 className="page-title">
           Tables - <span className="fw-semi-bold">Static</span>
-        </h2>
+        </h2> */}
 
         <Form className="d-md-down-none mr-3 ml-3" inline>
             <FormGroup>
