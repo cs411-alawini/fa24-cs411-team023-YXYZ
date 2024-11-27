@@ -7,6 +7,7 @@ import Widget from '../../components/Widget';
 import { registerUser, registerError } from '../../actions/register';
 import microsoft from '../../assets/microsoft.png';
 import Login from '../login';
+import axios from "axios";
 
 class Register extends React.Component {
     static propTypes = {
@@ -64,13 +65,25 @@ class Register extends React.Component {
         if (!this.isPasswordValid()) {
             this.checkPassword();
         } else {
-            this.props.dispatch(registerUser({
-                creds: {
-                    email: this.state.email,
-                    password: this.state.password
-                },
-                history: this.props.history
-            }));
+            const { email, password } = this.state;
+
+            axios
+                .post("http://localhost:10000/register", { email, password })
+                .then((response) => {
+                    alert("Registration successful!");
+                    this.props.history.push("/login"); // Redirect to login page
+                })
+                .catch((error) => {
+                    const errorMessage = error.response?.data?.detail || "An error occurred. Please try again.";
+                    this.props.dispatch(registerError(errorMessage));
+                });
+            // this.props.dispatch(registerUser({
+            //     creds: {
+            //         email: this.state.email,
+            //         password: this.state.password
+            //     },
+            //     history: this.props.history
+            // }));
         }
     }
 

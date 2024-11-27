@@ -40,8 +40,31 @@ class Login extends React.Component {
 
     doLogin(e) {
         e.preventDefault();
-        this.props.dispatch(loginUser({ email: this.state.email, password: this.state.password }));
-    }
+        const { email, password } = this.state;
+
+        try {
+            const response = await fetch("http://localhost:10000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert(data.message);
+                // Redirect to dashboard or homepage
+                this.props.history.push("/dashboard");
+            } else {
+                const errorData = await response.json();
+                this.setState({ error: errorData.detail });
+            }
+        } catch (error) {
+            this.setState({ error: "An error occurred. Please try again later." });
+        }
+    };
+        // this.props.dispatch(loginUser({ email: this.state.email, password: this.state.password }));
 
     signUp() {
         this.props.history.push('/register');
