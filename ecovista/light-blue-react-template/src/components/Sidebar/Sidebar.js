@@ -3,8 +3,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Progress, Alert} from 'reactstrap';
-import {withRouter} from 'react-router-dom';
-import {dismissAlert} from '../../actions/alerts';
+import {withRouter, Link} from 'react-router-dom';
+// import {dismissAlert} from '../../actions/alerts';
 import s from './Sidebar.module.scss';
 import LinksGroup from './LinksGroup';
 
@@ -61,9 +61,9 @@ class Sidebar extends React.Component {
         }
     }
 
-    dismissAlert(id) {
-        this.props.dispatch(dismissAlert(id));
-    }
+    // dismissAlert(id) {
+    //     this.props.dispatch(dismissAlert(id));
+    // }
 
     doLogout() {
         this.props.dispatch(logoutUser());
@@ -78,8 +78,8 @@ class Sidebar extends React.Component {
                 }}
             >
                 <header className={s.logo}>
-                    <a href="https://demo.flatlogic.com/light-blue-react/">Light <span
-                        className="fw-bold">Blue</span></a>
+                    <Link to="/" className={s.link}>Eco <span
+                        className="fw-bold">Vista</span></Link>
                 </header>
                 <ul className={s.nav}>
                     <LinksGroup
@@ -91,7 +91,7 @@ class Sidebar extends React.Component {
                         link="/app/main"
                         index="main"
                     />
-                    <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
+                    {/* <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
                     <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
@@ -100,17 +100,17 @@ class Sidebar extends React.Component {
                         iconName={<TypographyIcon className={s.menuIcon} />}
                         link="/app/typography"
                         index="core"
-                    />
+                    /> */}
                     <LinksGroup
                         onActiveSidebarItemChange={t => this.props.dispatch(changeActiveSidebarItem(t))}
                         activeItem={this.props.activeItem}
-                        header="Tables Basic"
+                        header="Search By State"
                         isHeader
                         iconName={<TablesIcon className={s.menuIcon} />}
                         link="/app/tables"
                         index="tables"
                     />
-                    <LinksGroup
+                    {/* <LinksGroup
                         onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
                         activeItem={this.props.activeItem}
                         header="Notifications"
@@ -138,7 +138,7 @@ class Sidebar extends React.Component {
                                 header: 'Maps', link: '/app/components/maps',
                             },
                         ]}
-                    />
+                    /> */}
                 </ul>
                 <h5 className={s.navTitle}>
                     LABELS
@@ -166,19 +166,19 @@ class Sidebar extends React.Component {
                     </li>
                 </ul>
                 {/* eslint-enable */}
-                <h5 className={s.navTitle}>
+                {/* <h5 className={s.navTitle}>
                     PROJECTS
-                </h5>
-                <div className={s.sidebarAlerts}>
+                </h5> */}
+                {/* <div className={s.sidebarAlerts}>
                     {this.props.alertsList.map(alert => // eslint-disable-line
                         <Alert
                             key={alert.id}
                             className={s.sidebarAlert} 
                             color="transparent"
                             isOpen={true} // eslint-disable-line
-                            toggle={() => {
-                                this.dismissAlert(alert.id);
-                            }}
+                            // toggle={() => {
+                            //     this.dismissAlert(alert.id);
+                            // }}
                         >
                             <span>{alert.title}</span><br/>
                             <Progress className={`bg-subtle-blue progress-xs mt-1`} color={alert.color}
@@ -186,7 +186,7 @@ class Sidebar extends React.Component {
                             <span className={s.alertFooter}>{alert.footer}</span>
                         </Alert>,
                     )}
-                </div>
+                </div> */}
             </nav>
         );
     }
@@ -196,7 +196,7 @@ function mapStateToProps(store) {
     return {
         sidebarOpened: store.navigation.sidebarOpened,
         sidebarStatic: store.navigation.sidebarStatic,
-        alertsList: store.alerts.alertsList,
+        // alertsList: store.alerts.alertsList,
         activeItem: store.navigation.activeItem,
     };
 }

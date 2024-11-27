@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router';
-import { HashRouter } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router';
+// import { HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
+import HomePage from '../components/homePage'; 
 /* eslint-disable */
 import ErrorPage from '../pages/error';
 /* eslint-enable */
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import '../styles/theme.scss';
 import LayoutComponent from '../components/Layout';
@@ -36,18 +39,18 @@ class App extends React.PureComponent {
                 hideProgressBar
                 closeButton={<CloseButton/>}
             />
-            <HashRouter>
-                <Switch>
-                    <Route path="/" exact render={() => <Redirect to="/app/main"/>}/>
+    <Router>
+    <Switch>
+                    <Route exact path="/" component={HomePage} />
                     <Route path="/app" exact render={() => <Redirect to="/app/main"/>}/>
                     <PrivateRoute path="/app" dispatch={this.props.dispatch} component={LayoutComponent}/>
-                    <Route path="/register" exact component={Register}/>
+                    <Route path="/register" component={Register}/>
                     <Route path="/login" exact component={Login}/>
                     <Route path="/error" exact component={ErrorPage}/>
                     <Route component={ErrorPage}/>
                     <Redirect from="*" to="/app/main/dashboard"/>
-                </Switch>
-            </HashRouter>
+                    </Switch>
+            </Router>
         </div>
 
     );

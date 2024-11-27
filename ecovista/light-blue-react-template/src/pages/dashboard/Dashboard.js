@@ -57,16 +57,16 @@ class Dashboard extends React.Component {
     return (
       <div className={s.root}>
         <h1 className="page-title">
-          Dashboard &nbsp;
-          <small>
+          EcoVista &nbsp;
+          {/* <small>
             <small>The Lucky One</small>
-          </small>
+          </small> */}
         </h1>
 
         <Row>
           <Col lg={7}>
             <Widget className="bg-transparent">
-              <Map />
+              <Map key={Date.now()} />
             </Widget>
           </Col>
           <Col lg={1} />
@@ -158,13 +158,13 @@ class Dashboard extends React.Component {
               <p>
                 Tracking: <strong>Active</strong>
               </p>
-              <p>
+              {/* <p>
                 <span className="circle bg-default text-white">
                   <i className="fa fa-cog" />
                 </span>
                 &nbsp; 391 elements installed, 84 sets
-              </p>
-              <div className="input-group mt">
+              </p> */}
+              {/* <div className="input-group mt">
                 <input
                   type="text"
                   className="form-control bg-custom-dark border-0"
@@ -178,7 +178,7 @@ class Dashboard extends React.Component {
                     <i className="fa fa-search text-light" />
                   </button>
                 </span>
-              </div>
+              </div> */}
             </Widget>
           </Col>
         </Row>

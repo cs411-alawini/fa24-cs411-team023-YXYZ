@@ -11,7 +11,7 @@ import s from './am4chartMap.module.scss';
   class Am4chartMap extends Component {
   
   componentDidMount() {
-    let map = am4core.create("map", am4maps.MapChart);
+    let map = am4core.create("mapdiv", am4maps.MapChart);
     map.geodata = am4geodata_usaHigh;
     map.percentHeight = 90;
     map.dy = 10;
@@ -89,7 +89,7 @@ import s from './am4chartMap.module.scss';
             <i className="fa fa-map-marker" />
           </p>
         </div>
-        <div className={s.map} id="map">
+        <div className={s.map} style={{ width: "100%", height: "500px" }} id="mapdiv">
           <span>Alternative content for the map</span>
         </div>
       </div>

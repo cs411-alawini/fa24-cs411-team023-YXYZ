@@ -12,7 +12,13 @@ import {
   Input,
   Label,
   Badge,
+  Form,
+  FormGroup,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
 } from "reactstrap";
+import SearchIcon from "../../../components/Icons/HeaderIcons/SearchIcon";
 import { Sparklines, SparklinesBars } from "react-sparklines";
 
 import Widget from "../../../components/Widget";
@@ -147,6 +153,23 @@ class Static extends React.Component {
         <h2 className="page-title">
           Tables - <span className="fw-semi-bold">Static</span>
         </h2>
+
+        <Form className="d-md-down-none mr-3 ml-3" inline>
+            <FormGroup>
+              <InputGroup className={`input-group-no-border ${s.searchForm}`}>
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText className={s.inputGroupText}>
+                    <SearchIcon className={s.headerIcon} />
+                  </InputGroupText>
+                </InputGroupAddon>
+                <Input
+                  id="search-input"
+                  className="input-transparent"
+                  placeholder="Search Dashboard"
+                />
+              </InputGroup>
+            </FormGroup>
+          </Form>
         <Row>
           <Col lg={6} md={12} sm={12}>
             <Widget
@@ -448,11 +471,11 @@ class Static extends React.Component {
         <Row> 
           <Col lg={6} md={6} sm={12}>
             <Widget
-              title={
-                <h5>
-                  Table <span className="fw-semi-bold">Styles</span>
-                </h5>
-              }
+              // title={
+              //   <h5>
+              //     Table <span className="fw-semi-bold">Styles</span>
+              //   </h5>
+              // }
               settings
               close
             >
