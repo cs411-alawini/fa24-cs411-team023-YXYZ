@@ -28,8 +28,8 @@ class Register extends React.Component {
         // this.changeEmail = this.changeEmail.bind(this);
         // this.changePassword = this.changePassword.bind(this);
         // this.changeConfirmPassword = this.changeConfirmPassword.bind(this);
-        // this.checkPassword = this.checkPassword.bind(this);
-        // this.isPasswordValid = this.isPasswordValid.bind(this);
+        this.checkPassword = this.checkPassword.bind(this);
+        this.isPasswordValid = this.isPasswordValid.bind(this);
     }
     handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -51,26 +51,28 @@ class Register extends React.Component {
     //     this.setState({confirmPassword: event.target.value});
     // }
 
-    // checkPassword() {
-    //     if (!this.isPasswordValid()) {
-    //         if (!this.state.password) {
-    //             this.props.dispatch(registerError("Password field is empty"));
-    //         } else {
-    //             this.props.dispatch(registerError("Passwords are not equal"));
-    //         }
-    //         setTimeout(() => {
-    //             this.props.dispatch(registerError());
-    //         }, 3 * 1000)
-    //     }
-    // }
+    checkPassword() {
+        if (!this.isPasswordValid()) {
+            if (!this.state.password) {
+                this.props.dispatch(registerError("Password field is empty"));
+            } else {
+                this.props.dispatch(registerError("Passwords are not equal"));
+            }
+            setTimeout(() => {
+                this.props.dispatch(registerError());
+            }, 3 * 1000)
+        }
+    }
 
-    // isPasswordValid() {
-    //    return this.state.password && this.state.password === this.state.confirmPassword;
-    // }
+    isPasswordValid() {
+       return this.state.password && this.state.password === this.state.confirmPassword;
+    }
 
     doRegister(e) {
         e.preventDefault();
-
+        if (!this.isPasswordValid()) {
+            this.checkPassword();
+        } else {
         const { email, password, county_code } = this.state;
         const nickname = email.split('@')[0];
 
@@ -94,7 +96,7 @@ class Register extends React.Component {
                 this.setState({ error: errorMessage });
             });
     }
-
+    }
     render() {
         const {from} = this.props.location.state || {from: {pathname: '/app'}}; // eslint-disable-line
 
@@ -108,7 +110,7 @@ class Register extends React.Component {
         return (
             <div className="auth-page">
                 <Container>
-                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">Login to your Web App</h3>}>
+                    <Widget className="widget-auth mx-auto" title={<h3 className="mt-0">EcoVista</h3>}>
                         <p className="widget-auth-info">
                             Please fill all fields below.
                         </p>

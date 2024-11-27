@@ -56,16 +56,16 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        <Row>
-          <Col lg={7}>
+        {/* <Row>
+          <Col lg={7}> */}
             <Widget className="bg-transparent">
               <Map />
             </Widget>
-          </Col>
-          <Col lg={1} />
+          {/* </Col>
+          <Col lg={1} /> */}
 
-          <Col lg={4}>
-            <Widget
+          {/* <Col lg={4}> */}
+            {/* <Widget
               className="bg-transparent"
               title={
                 <h5>
@@ -150,7 +150,7 @@ class Dashboard extends React.Component {
               <h6 className="fw-semi-bold mt">Map Distributions</h6>
               <p>
                 Tracking: <strong>Active</strong>
-              </p>
+              </p> */}
               {/* <p>
                 <span className="circle bg-default text-white">
                   <i className="fa fa-cog" />
@@ -172,9 +172,9 @@ class Dashboard extends React.Component {
                   </button>
                 </span>
               </div> */}
-            </Widget>
-          </Col>
-        </Row>
+            {/* </Widget>
+          </Col> */}
+        {/* </Row>  */}
 
         <Row>
           <Col lg={6} xl={6} xs={12}>
