@@ -38,7 +38,7 @@ class Login extends React.Component {
         this.setState({ password: event.target.value });
     }
 
-    doLogin(e) {
+    async doLogin(e) {
         e.preventDefault();
         const { email, password } = this.state;
 
