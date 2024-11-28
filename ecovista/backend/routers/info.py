@@ -1,12 +1,12 @@
 # info.py
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 import pymysql
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import APIRouter
-from ecovista.backend.utils import db_config
+from utils import db_config
 
 router = APIRouter()
 table_name_map = {
@@ -21,7 +21,16 @@ table_name_map = {
 #     year: str
 #     county_code: str
 #     data_type: str
-
+@router.get("/read-cookie")
+async def read_cookie(request: Request):
+    user_session = request.cookies.get("user_session")
+    if user_session:
+        return {"success": True, "user_session": user_session}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="No user session found in cookies."
+        )
 
 @router.get("/filter")
 async def filter(state: str, year: str, county_code: str, data_type: str):

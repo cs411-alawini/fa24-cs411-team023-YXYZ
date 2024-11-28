@@ -1,5 +1,5 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './InfoPage.css';
 import axios from 'axios';
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
@@ -21,12 +21,33 @@ const Data_Types = [
 ];
 
 function InfoPage() {
+  const navigate = useNavigate();
   const [filterText, setFilterText] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedDataType, setSelectedDataType] = useState('');
   const [yearRange, setYearRange] = useState('');
   const [county_code, setCountyCode] = useState('');
   const [filterResult, setFilterResult] = useState(null);
+
+  const [userSession, setUserSession] = useState(null);
+
+  useEffect(() => {
+    const fetchUserSession = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/read-cookie');
+        if (response.data.user_session) {
+          console.log('User session:', response.data.user_session);
+          setUserSession(response.data.user_session);
+        } else {
+          console.error('No user session found.');
+        }
+      } catch (error) {
+        console.error('Error fetching user session:', error);
+      }
+    };
+
+    fetchUserSession();
+  }, []);
 
 
   const filteredStates = US_STATES.filter(state =>
@@ -54,7 +75,7 @@ function InfoPage() {
   const handleApplyFilter = async () => {
     try {
       console.log('Applying filter with:', filterText, yearRange, selectedDataType);
-      const response = await axios.get('http://localhost:10000/filter', {
+      const response = await axios.get('http://localhost:8000/filter', {
         params: {
           state: filterText,
           year: yearRange,
@@ -70,9 +91,43 @@ function InfoPage() {
       alert('Failed to apply filters');
     }
   };
+
+  const handleLogout = async () => {
+      try {
+        const response = await axios.post('http://localhost:8000/logout');
+        if (response.status === 200) {
+          console.log("Logout successful!");
+          document.cookie = "user_session=; Path=/; Expires=Thu, 01 Jan 1990 00:00:00 GMT;";
+          window.location.href = '/login';
+        } else {
+          console.error("Failed to logout:", response.statusText);
+          alert("Failed to logout. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error logging out:", error);
+        alert("An error occurred while logging out.");
+      }
+  };
+
+
+
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
   
   return (
     <div className="info-app">
+        <div className="info-header">
+        <div className="info-header-right">
+          <button className="user-icon" onClick={handleProfileClick}>
+            <span role="img" aria-label="user-icon" style={{ fontSize: '24px' }}>👤</span>
+          </button>
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
+      </div>
+
       <div className="background">
         <img src="/homebackground.png" alt="Culinary Background" className="background-image" />
       </div>

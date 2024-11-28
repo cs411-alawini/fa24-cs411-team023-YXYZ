@@ -1,10 +1,10 @@
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Response
 from pydantic import BaseModel
 import pymysql
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import APIRouter
-from ecovista.backend.utils import db_config
+from utils import db_config
 
 load_dotenv()
 
@@ -63,7 +63,7 @@ async def register_user(request: RegisterRequest):
 
 # Login Endpoint
 @router.post("/login", status_code=status.HTTP_201_CREATED)
-async def register_user(request: Login):
+async def register_user(request: Login, response: Response):
     print(request)
     connection = None
     cursor = None
@@ -74,7 +74,7 @@ async def register_user(request: Login):
             password=db_config["password"],
             database=db_config["database"],
         )
-        print("成功连接到数据库")
+        print("Connect to DB successfully")
         cursor = connection.cursor(pymysql.cursors.DictCursor)
         with cursor:
             check_user_query = (
@@ -90,6 +90,14 @@ async def register_user(request: Login):
                     status_code=status.HTTP_401_UNAUTHORIZED,
                     detail="Invalid email or password.",
                 )
+
+            response.set_cookie(
+                key="user_session",
+                value=str(user["user_id"]),
+                httponly=True,
+                secure=False,
+                samesite="Lax"
+            )
 
             return {
                 "success": True,

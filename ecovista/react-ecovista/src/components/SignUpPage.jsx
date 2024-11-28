@@ -25,7 +25,7 @@ const SignUpPage = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:10000/register', {
+      const response = await axios.post('http://localhost:8000/register', {
         email,
         nickname,
         county_code: countyCode,
