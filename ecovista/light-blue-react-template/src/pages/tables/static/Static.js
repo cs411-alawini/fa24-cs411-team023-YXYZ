@@ -25,98 +25,148 @@ import Widget from "../../../components/Widget";
 import s from "./Static.module.scss";
 
 class Static extends React.Component {
-  constructor(props) {
-    super(props);
+constructor(props) {
+  super(props);
 
-    this.state = {
-      tableStyles: [
-        {
-          id: 1,
-          picture: require("../../../assets/tables/1.png"), // eslint-disable-line global-require
-          description: "Palo Alto",
-          info: {
-            type: "JPEG",
-            dimensions: "200x150",
-          },
-          date: new Date("September 14, 2012"),
-          size: "45.6 KB",
-          progress: {
-            percent: 29,
-            colorClass: "success",
-          },
+  this.state = {
+    tableStyles: [
+      {
+        id: 1,
+        picture: require("../../../assets/tables/1.png"), // eslint-disable-line global-require
+        description: "Palo Alto",
+        info: {
+          type: "JPEG",
+          dimensions: "200x150",
         },
-        {
-          id: 2,
-          picture: require("../../../assets/tables/2.png"), // eslint-disable-line global-require
-          description: "The Sky",
-          info: {
-            type: "PSD",
-            dimensions: "2400x1455",
-          },
-          date: new Date("November 14, 2012"),
-          size: "15.3 MB",
-          progress: {
-            percent: 33,
-            colorClass: "warning",
-          },
+        date: new Date("September 14, 2012"),
+        size: "45.6 KB",
+        progress: {
+          percent: 29,
+          colorClass: "success",
         },
-        {
-          id: 3,
-          picture: require("../../../assets/tables/3.png"), // eslint-disable-line global-require
-          description: "Down the road",
-          label: {
-            colorClass: "primary",
-            text: "INFO!",
-          },
-          info: {
-            type: "JPEG",
-            dimensions: "200x150",
-          },
-          date: new Date("September 14, 2012"),
-          size: "49.0 KB",
-          progress: {
-            percent: 38,
-            colorClass: "inverse",
-          },
+      },
+      {
+        id: 2,
+        picture: require("../../../assets/tables/2.png"), // eslint-disable-line global-require
+        description: "The Sky",
+        info: {
+          type: "PSD",
+          dimensions: "2400x1455",
         },
-        {
-          id: 4,
-          picture: require("../../../assets/tables/4.png"), // eslint-disable-line global-require
-          description: "The Edge",
-          info: {
-            type: "PNG",
-            dimensions: "210x160",
-          },
-          date: new Date("September 15, 2012"),
-          size: "69.1 KB",
-          progress: {
-            percent: 17,
-            colorClass: "danger",
-          },
+        date: new Date("November 14, 2012"),
+        size: "15.3 MB",
+        progress: {
+          percent: 33,
+          colorClass: "warning",
         },
-        {
-          id: 5,
-          picture: require("../../../assets/tables/5.png"), // eslint-disable-line global-require
-          description: "Fortress",
-          info: {
-            type: "JPEG",
-            dimensions: "1452x1320",
-          },
-          date: new Date("October 1, 2012"),
-          size: "2.3 MB",
-          progress: {
-            percent: 41,
-            colorClass: "primary",
-          },
+      },
+      {
+        id: 3,
+        picture: require("../../../assets/tables/3.png"), // eslint-disable-line global-require
+        description: "Down the road",
+        label: {
+          colorClass: "primary",
+          text: "INFO!",
         },
-      ],
-      checkboxes1: [false, true, false, false],
-      checkboxes2: [false, false, false, false, false, false],
-      checkboxes3: [false, false, false, false, false, false],
-    };
+        info: {
+          type: "JPEG",
+          dimensions: "200x150",
+        },
+        date: new Date("September 14, 2012"),
+        size: "49.0 KB",
+        progress: {
+          percent: 38,
+          colorClass: "inverse",
+        },
+      },
+      {
+        id: 4,
+        picture: require("../../../assets/tables/4.png"), // eslint-disable-line global-require
+        description: "The Edge",
+        info: {
+          type: "PNG",
+          dimensions: "210x160",
+        },
+        date: new Date("September 15, 2012"),
+        size: "69.1 KB",
+        progress: {
+          percent: 17,
+          colorClass: "danger",
+        },
+      },
+      {
+        id: 5,
+        picture: require("../../../assets/tables/5.png"), // eslint-disable-line global-require
+        description: "Fortress",
+        info: {
+          type: "JPEG",
+          dimensions: "1452x1320",
+        },
+        date: new Date("October 1, 2012"),
+        size: "2.3 MB",
+        progress: {
+          percent: 41,
+          colorClass: "primary",
+        },
+      },
+    ],
+    checkboxes1: [false, true, false, false],
+    checkboxes2: [false, false, false, false, false, false],
+    checkboxes3: [false, false, false, false, false, false],
+    searchText1: "",
+    searchText2: "",
+    searchText3: "",
+    searchText4: "",
+  };
+  this.checkAll = this.checkAll.bind(this);
 
-    this.checkAll = this.checkAll.bind(this);
+  this.handleSearch = this.handleSearch.bind(this);
+  this.performSearch = this.performSearch.bind(this);
+}
+handleDropdownChange = (event, selectedValue) => {
+  this.setState(
+    {
+      searchText4: selectedValue,
+    },
+    () => {
+      this.performSearch(
+        this.state.searchText1,
+        this.state.searchText2,
+        this.state.searchText3,
+        this.state.searchText4
+      );
+    }
+  );
+};
+
+handleSearch = (event, searchIndex) => {
+this.setState(
+  {
+    [`searchText${searchIndex}`]: event.target.value,
+  },
+  () => {
+    this.performSearch(
+      this.state.searchText1,
+      this.state.searchText2,
+      this.state.searchText3,
+      this.state.searchText4
+    );
   }
+);
+};
+
+  performSearch = (search1, search2, search3, search4) => {
+  // Make the API call to the FastAPI backend
+  fetch(`http://localhost:10000/filter?state=${search1}&year=${search2}&county_code=${search3}&data_type=${search4}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the search results from the backend
+      console.log(data.results);
+    })
+    .catch((error) => {
+      console.error("Error performing search:", error);
+    });
+  };
 
   parseDate(date) {
     this.dateSet = date.toDateString().split(" ");
@@ -150,26 +200,97 @@ class Static extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        {/* <h2 className="page-title">
-          Tables - <span className="fw-semi-bold">Static</span>
-        </h2> */}
-
-        <Form className="d-md-down-none mr-3 ml-3" inline>
-            <FormGroup>
-              <InputGroup className={`input-group-no-border ${s.searchForm}`}>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText className={s.inputGroupText}>
-                    <SearchIcon className={s.headerIcon} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  id="search-input"
-                  className="input-transparent"
-                  placeholder="Search Dashboard"
-                />
-              </InputGroup>
-            </FormGroup>
-          </Form>
+        <Row className="mb-3">
+          <Col lg={3} md={6} sm={12}>
+            <Form className="d-md-down-none mr-3 ml-3" inline>
+              <FormGroup>
+                <InputGroup className={`input-group-no-border ${s.searchForm}`}>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText className={s.inputGroupText}>
+                      <SearchIcon className={s.headerIcon} />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    id="search-input-1"
+                    className="input-transparent"
+                    placeholder="Search"
+                    value={this.state.searchText1}
+                    onChange={(event) => this.handleSearch(event, 1)}
+                  />
+                </InputGroup>
+              </FormGroup>
+            </Form>
+          </Col>
+          <Col lg={3} md={6} sm={12}>
+            <Form className="d-md-down-none mr-3 ml-3" inline>
+              <FormGroup>
+                <InputGroup className={`input-group-no-border ${s.searchForm}`}>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText className={s.inputGroupText}>
+                      <SearchIcon className={s.headerIcon} />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    id="search-input-2"
+                    className="input-transparent"
+                    placeholder="Search"
+                    value={this.state.searchText2}
+                    onChange={(event) => this.handleSearch(event, 2)}
+                  />
+                </InputGroup>
+              </FormGroup>
+            </Form>
+          </Col>
+          <Col lg={3} md={6} sm={12}>
+            <Form className="d-md-down-none mr-3 ml-3" inline>
+              <FormGroup>
+                <InputGroup className={`input-group-no-border ${s.searchForm}`}>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText className={s.inputGroupText}>
+                      <SearchIcon className={s.headerIcon} />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    id="search-input-3"
+                    className="input-transparent"
+                    placeholder="Search"
+                    value={this.state.searchText3}
+                    onChange={(event) => this.handleSearch(event, 3)}
+                  />
+                </InputGroup>
+              </FormGroup>
+            </Form>
+          </Col>
+          <Col lg={3} md={6} sm={12}>
+            <UncontrolledButtonDropdown>
+              <DropdownToggle caret>
+                {this.state.searchText4 || "Select Data Type"}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem
+                  onClick={(event) => this.handleDropdownChange(event, "Air Quality")}
+                >
+                  Air Quality
+                </DropdownItem>
+                <DropdownItem
+                  onClick={(event) => this.handleDropdownChange(event, "Drought")}
+                >
+                  Drought
+                </DropdownItem>
+                <DropdownItem
+                  onClick={(event) => this.handleDropdownChange(event, "CO")}
+                >
+                  CO
+                </DropdownItem>
+                <DropdownItem
+                  onClick={(event) => this.handleDropdownChange(event, "NO2")}
+                >
+                  NO2
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledButtonDropdown>
+          </Col>
+        </Row>
         <Row>
           <Col lg={6} md={12} sm={12}>
             {/* <Widget

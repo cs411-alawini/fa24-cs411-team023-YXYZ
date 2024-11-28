@@ -2,6 +2,9 @@ import { connect } from "react-redux";
 import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
+import LinksGroup from '../Sidebar/LinksGroup';
+import {changeActiveSidebarItem} from '../../actions/navigation';
+import HomeIcon from '../Icons/SidebarIcons/HomeIcon';
 import {
   Navbar,
   Nav,
@@ -186,7 +189,7 @@ class Header extends React.Component {
               />
             </InputGroup>
           </Collapse>
-          <Form className="d-md-down-none mr-3 ml-3" inline>
+          {/* <Form className="d-md-down-none mr-3 ml-3" inline>
             <FormGroup>
               <InputGroup className={`input-group-no-border ${s.searchForm}`}>
                 <InputGroupAddon addonType="prepend">
@@ -201,7 +204,7 @@ class Header extends React.Component {
                 />
               </InputGroup>
             </FormGroup>
-          </Form>
+          </Form> */}
 
           <Nav className="ml-md-0">
             <Dropdown

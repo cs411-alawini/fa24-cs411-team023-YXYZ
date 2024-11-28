@@ -57,7 +57,6 @@ class Layout extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        {/* Sidebar */}
         <Sidebar />
 
         <div className={s.wrap}>
@@ -75,12 +74,12 @@ class Layout extends React.Component {
                   <Switch>
             {/* Redirect base path to Dashboard */}
                     <Route path="/dashboard" exact component={Dashboard} />
+                    <Route path="/app/tables" exact component={TablesStatic} />
                     <Redirect from="/app" to="/dashboard" />
                     <Route component={ErrorPage} />
                     {/* <Route path="/app/components/icons" exact component={UIIcons} /> */}
                     {/* <Route path="/app/notifications" exact component={UINotifications} /> */}
                     {/* <Route path="/app/components/charts" exact component={Charts} /> */}
-                    <Route path="/app/tables" exact component={TablesStatic} />
                     {/* <Route path="/app/components/maps" exact component={MapsGoogle} />
                     <Route path="/app/typography" exact component={CoreTypography} /> */}
                   </Switch>

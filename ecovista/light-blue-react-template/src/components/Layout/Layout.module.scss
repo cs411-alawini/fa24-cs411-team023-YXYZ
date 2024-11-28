@@ -36,5 +36,5 @@
   position: fixed; /* Keep it fixed on the left */
   background-color: #1a1a2e; /* Sidebar background */
   color: white;
-  z-index: 100; /* Ensure it’s above other content */
+  z-index: 1000; /* Ensure it’s above other content */
 }

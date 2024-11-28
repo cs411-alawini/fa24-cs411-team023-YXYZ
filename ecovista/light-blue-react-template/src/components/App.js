@@ -43,21 +43,20 @@ class App extends React.PureComponent {
             />
     <Router>
     <Switch>
-                    {/* Public Routes - These should come first */}
                     <Route exact path="/" component={HomePage} />
                     <Route path="/login" exact component={Login} />
                     <Route path="/register" exact component={Register} />
                     <Route path="/error" exact component={ErrorPage} />
-                    <Route path="/app/tables" exact component={Tables} />
-                    {/* Protected Routes - Using a more specific structure */}
-                    {/* <Route 
+                    {/* <Route path="/app/tables" exact component={Tables} /> */}
+
+                    <Route 
                         path="/app/tables"
                         render={(props) => (
                             <Layout>
                                 <Tables {...props} />
                             </Layout>
                         )}
-                    /> */}
+                    />
 
                     <Route 
                         path="/dashboard" 
@@ -69,25 +68,16 @@ class App extends React.PureComponent {
                     />
 
                     <Route 
-                        path="/tables" 
-                        render={(props) => (
-                            <Layout>
-                                <Tables {...props} />
-                            </Layout>
-                        )}
+                    path="/app"
+                    render={(props) => (
+                        <Layout>
+                        <Switch>
+                            <Redirect to="/login" />
+                        </Switch>
+                        </Layout>
+                    )}
                     />
 
-                    <Route 
-                        path="/app"
-                        render={(props) => (
-                            <Layout>
-                                <Switch>
-                                    <Route path="/tables" component={Tables} />
-                                    <Redirect to="/login" />
-                                </Switch>
-                            </Layout>
-                        )}
-                    /> 
                     <Redirect to="/error" />
                 </Switch>
             </Router>

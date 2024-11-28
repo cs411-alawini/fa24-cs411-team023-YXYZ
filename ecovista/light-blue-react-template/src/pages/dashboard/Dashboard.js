@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Progress, Table, Label, Input } from "reactstrap";
-
+import * as am4core from "@amcharts/amcharts4/core";
 import Widget from "../../components/Widget";
 
 import Calendar from "./components/calendar/Calendar";
@@ -53,13 +53,21 @@ class Dashboard extends React.Component {
     });
   }
 
+  componentDidMount() {
+    am4core.options.queue = true;
+  }
+  
+  componentWillUnmount() {
+    am4core.disposeAllCharts();
+  }
+
   render() {
     return (
       <div className={s.root}>
         {/* <Row>
           <Col lg={7}> */}
             <Widget className="bg-transparent">
-              <Map />
+              <Map key={Date.now()}/>
             </Widget>
           {/* </Col>
           <Col lg={1} /> */}

@@ -11,6 +11,8 @@ import s from './am4chartMap.module.scss';
   class Am4chartMap extends Component {
   
   componentDidMount() {
+    am4core.ready(() => {
+    am4core.options.autoDispose = true;
     let map = am4core.create("mapdiv", am4maps.MapChart);
     map.geodata = am4geodata_usaHigh;
     map.percentHeight = 90;
@@ -64,12 +66,15 @@ import s from './am4chartMap.module.scss';
     circle.tooltipText = '{tooltip}';
     circle.propertyFields.radius = 'size';
     this.map = map;
+  });
   }
 
   componentWillUnmount() {
     if(this.map) {
       this.map.dispose();
     }
+    am4core.disposeAllCharts();
+    am4core.options.queue = true;
   }
 
   render() {
@@ -89,7 +94,12 @@ import s from './am4chartMap.module.scss';
             <i className="fa fa-map-marker" />
           </p>
         </div>
-        <div className={s.map} style={{ width: "100%", height: "500px" }} id="mapdiv">
+        <div className={s.map} id="mapdiv" style={{ 
+            width: "100%", 
+            height: "400px",
+            position: "relative",
+            overflow: "hidden"
+          }}>
           <span>Alternative content for the map</span>
         </div>
       </div>
