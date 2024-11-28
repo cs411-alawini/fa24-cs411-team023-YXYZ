@@ -129,30 +129,28 @@ handleDropdownChange = (event, selectedValue) => {
       searchText4: selectedValue,
     },
     () => {
-      this.performSearch(
-        this.state.searchText1,
-        this.state.searchText2,
-        this.state.searchText3,
-        this.state.searchText4
-      );
+      // Check if all search fields have values
+      const { searchText1, searchText2, searchText3, searchText4 } = this.state;
+      if (searchText1 && searchText2 && searchText3 && searchText4) {
+        this.performSearch(searchText1, searchText2, searchText3, searchText4);
+      }
     }
   );
 };
 
 handleSearch = (event, searchIndex) => {
-this.setState(
-  {
-    [`searchText${searchIndex}`]: event.target.value,
-  },
-  () => {
-    this.performSearch(
-      this.state.searchText1,
-      this.state.searchText2,
-      this.state.searchText3,
-      this.state.searchText4
-    );
-  }
-);
+  this.setState(
+    {
+      [`searchText${searchIndex}`]: event.target.value,
+    },
+    () => {
+      // Check if all search fields have values
+      const { searchText1, searchText2, searchText3, searchText4 } = this.state;
+      if (searchText1 && searchText2 && searchText3 && searchText4) {
+        this.performSearch(searchText1, searchText2, searchText3, searchText4);
+      }
+    }
+  );
 };
 
   performSearch = (search1, search2, search3, search4) => {
@@ -213,7 +211,7 @@ this.setState(
                   <Input
                     id="search-input-1"
                     className="input-transparent"
-                    placeholder="Search"
+                    placeholder="Enter State Name..."
                     value={this.state.searchText1}
                     onChange={(event) => this.handleSearch(event, 1)}
                   />
@@ -233,7 +231,7 @@ this.setState(
                   <Input
                     id="search-input-2"
                     className="input-transparent"
-                    placeholder="Search"
+                    placeholder="Enter Year..."
                     value={this.state.searchText2}
                     onChange={(event) => this.handleSearch(event, 2)}
                   />
@@ -253,7 +251,7 @@ this.setState(
                   <Input
                     id="search-input-3"
                     className="input-transparent"
-                    placeholder="Search"
+                    placeholder="Enter County Code..."
                     value={this.state.searchText3}
                     onChange={(event) => this.handleSearch(event, 3)}
                   />
