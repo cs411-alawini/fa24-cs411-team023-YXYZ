@@ -31,23 +31,23 @@ function InfoPage() {
 
   const [userSession, setUserSession] = useState(null);
 
-  useEffect(() => {
-    const fetchUserSession = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/read-cookie');
-        if (response.data.user_session) {
-          console.log('User session:', response.data.user_session);
-          setUserSession(response.data.user_session);
-        } else {
-          console.error('No user session found.');
-        }
-      } catch (error) {
-        console.error('Error fetching user session:', error);
-      }
-    };
-
-    fetchUserSession();
-  }, []);
+//   useEffect(() => {
+//     const fetchUserSession = async () => {
+//       try {
+//         const response = await axios.get('http://localhost:8000/read-cookie');
+//         if (response.data.user_session) {
+//           console.log('User session:', response.data.user_session);
+//           setUserSession(response.data.user_session);
+//         } else {
+//           console.error('No user session found.');
+//         }
+//       } catch (error) {
+//         console.error('Error fetching user session:', error);
+//       }
+//     };
+//
+//     fetchUserSession();
+//   }, []);
 
 
   const filteredStates = US_STATES.filter(state =>
@@ -94,20 +94,18 @@ function InfoPage() {
 
   const handleLogout = async () => {
       try {
-        const response = await axios.post('http://localhost:8000/logout');
+        const response = await axios.post('http://localhost:8000/logout', {}, {
+          withCredentials: true,
+        });
         if (response.status === 200) {
-          console.log("Logout successful!");
-          document.cookie = "user_session=; Path=/; Expires=Thu, 01 Jan 1990 00:00:00 GMT;";
           window.location.href = '/login';
         } else {
-          console.error("Failed to logout:", response.statusText);
           alert("Failed to logout. Please try again.");
         }
       } catch (error) {
-        console.error("Error logging out:", error);
         alert("An error occurred while logging out.");
       }
-  };
+    };
 
 
 

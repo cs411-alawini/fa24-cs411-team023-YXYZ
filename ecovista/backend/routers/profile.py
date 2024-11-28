@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Response
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 from fastapi import APIRouter
@@ -12,6 +12,12 @@ class Profile(BaseModel):
     email: str
     nickname: str
     county_code: int
+
+@router.post("/logout", status_code=status.HTTP_200_OK)
+async def logout(response: Response):
+    # 清除 Cookie
+    response.delete_cookie(key="user_session", path="/", samesite="Lax")
+    return {"success": True, "message": "Logged out successfully."}
 
 @router.get("/profile", status_code=status.HTTP_200_OK)
 async def get_profile(request: Request):

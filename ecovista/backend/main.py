@@ -21,8 +21,3 @@ app.include_router(profile_router)
 @app.get("/")
 async def root():
     return {"message": "Hello CS411 Applications!"}
-
-@app.post("/logout", status_code=status.HTTP_200_OK)
-async def logout(response: Response):
-    response.delete_cookie(key="user_session")
-    return {"success": True, "message": "Logged out successfully."}
