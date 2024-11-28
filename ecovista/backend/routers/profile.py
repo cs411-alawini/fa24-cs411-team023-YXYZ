@@ -15,7 +15,7 @@ class Profile(BaseModel):
 
 @router.get("/profile", status_code=status.HTTP_200_OK)
 async def get_profile(request: Request):
-    # 从 Cookie 中获取 user_session
+
     user_id = request.cookies.get("user_session")
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
@@ -43,10 +43,8 @@ async def get_profile(request: Request):
         if "connection" in locals() and connection.open:
             connection.close()
 
-# 更新用户 Profile
 @router.put("/profile", status_code=status.HTTP_200_OK)
 async def update_profile(profile: Profile, request: Request):
-    # 从 Cookie 中获取 user_session
     user_id = request.cookies.get("user_session")
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
