@@ -57,11 +57,11 @@ class Notifications extends React.Component {
           Cancel launch
         </Button>
       </div>,
-      { 
+      {
         ...this.state.options,
         className: "Toastify__toast--primary",
-        toastId: id
-        }
+        toastId: id,
+      }
     );
   };
 

@@ -1,4 +1,4 @@
-@import '../../styles/app';
+@import "../../styles/app";
 
 .root {
   :global {
@@ -19,7 +19,7 @@
     }
 
     .location-selector .bit:hover {
-      background-color: rgba($subtle-blue,.8);
+      background-color: rgba($subtle-blue, 0.8);
     }
 
     .location-selector .bit.top,
@@ -52,7 +52,6 @@
     .location-selector .bit.left {
       left: 0;
     }
-
   }
 }
 

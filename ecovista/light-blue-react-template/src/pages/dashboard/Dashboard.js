@@ -1,14 +1,8 @@
 import React from "react";
-import { Row, Col, Progress, Table, Label, Input } from "reactstrap";
+import { Row, Col, Progress} from "reactstrap";
 import * as am4core from "@amcharts/amcharts4/core";
 import Widget from "../../components/Widget";
-
-import Calendar from "./components/calendar/Calendar";
 import Map from "./components/am4chartMap/am4chartMap";
-import Rickshaw from "./components/rickshaw/Rickshaw";
-
-import AnimateNumber from "react-animated-number";
-
 import s from "./Dashboard.module.scss";
 
 import peopleA1 from "../../assets/people/a1.jpg";
@@ -56,7 +50,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     am4core.options.queue = true;
   }
-  
+
   componentWillUnmount() {
     am4core.disposeAllCharts();
   }
@@ -64,125 +58,9 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className={s.root}>
-        {/* <Row>
-          <Col lg={7}> */}
-            <Widget className="bg-transparent">
-              <Map key={Date.now()}/>
-            </Widget>
-          {/* </Col>
-          <Col lg={1} /> */}
-
-          {/* <Col lg={4}> */}
-            {/* <Widget
-              className="bg-transparent"
-              title={
-                <h5>
-                  {" "}
-                  Map
-                  <span className="fw-semi-bold">&nbsp;Statistics</span>
-                </h5>
-              }
-              settings
-              refresh
-              close
-            >
-              <p>
-                Status: <strong>Live</strong>
-              </p>
-              <p>
-                <span className="circle bg-default text-white">
-                  <i className="fa fa-map-marker" />
-                </span>{" "}
-                &nbsp; 146 Countries, 2759 Cities
-              </p>
-              <div className="row progress-stats">
-                <div className="col-md-9 col-12">
-                  <h6 className="name fw-semi-bold">Foreign Visits</h6>
-                  <p className="description deemphasize mb-xs text-white">
-                    Some Cool Text
-                  </p>
-                  <Progress
-                    color="primary"
-                    value="60"
-                    className="bg-subtle-blue progress-xs"
-                  />
-                </div>
-                <div className="col-md-3 col-12 text-center">
-                  <span className="status rounded rounded-lg bg-default text-light">
-                    <small>
-                      <AnimateNumber value={75} />%
-                    </small>
-                  </span>
-                </div>
-              </div>
-              <div className="row progress-stats">
-                <div className="col-md-9 col-12">
-                  <h6 className="name fw-semi-bold">Local Visits</h6>
-                  <p className="description deemphasize mb-xs text-white">
-                    P. to C. Conversion
-                  </p>
-                  <Progress
-                    color="danger"
-                    value="39"
-                    className="bg-subtle-blue progress-xs"
-                  />
-                </div>
-                <div className="col-md-3 col-12 text-center">
-                  <span className="status rounded rounded-lg bg-default text-light">
-                    <small>
-                      <AnimateNumber value={84} />%
-                    </small>
-                  </span>
-                </div>
-              </div>
-              <div className="row progress-stats">
-                <div className="col-md-9 col-12">
-                  <h6 className="name fw-semi-bold">Sound Frequencies</h6>
-                  <p className="description deemphasize mb-xs text-white">
-                    Average Bitrate
-                  </p>
-                  <Progress
-                    color="success"
-                    value="80"
-                    className="bg-subtle-blue progress-xs"
-                  />
-                </div>
-                <div className="col-md-3 col-12 text-center">
-                  <span className="status rounded rounded-lg bg-default text-light">
-                    <small>
-                      <AnimateNumber value={92} />%
-                    </small>
-                  </span>
-                </div>
-              </div>
-              <h6 className="fw-semi-bold mt">Map Distributions</h6>
-              <p>
-                Tracking: <strong>Active</strong>
-              </p> */}
-              {/* <p>
-                <span className="circle bg-default text-white">
-                  <i className="fa fa-cog" />
-                </span>
-                &nbsp; 391 elements installed, 84 sets
-              </p> */}
-              {/* <div className="input-group mt">
-                <input
-                  type="text"
-                  className="form-control bg-custom-dark border-0"
-                  placeholder="Search Map"
-                />
-                <span className="input-group-btn">
-                  <button
-                    type="submit"
-                    className={`btn btn-subtle-blue ${s.searchBtn}`}
-                  >
-                    <i className="fa fa-search text-light" />
-                  </button>
-                </span>
-              </div> */}
-            {/* </Widget>
-          </Col> */}
-        {/* </Row>  */}
+        <Widget className="bg-transparent">
+          <Map key={Date.now()} />
+        </Widget>
 
         <Row>
           <Col lg={6} xl={6} xs={12}>
@@ -252,7 +130,7 @@ class Dashboard extends React.Component {
         </Row>
 
         <Row>
-        <Col lg={6} xl={6} xs={12}>
+          <Col lg={6} xl={6} xs={12}>
             <Widget title={<h6> RANDOM VALUES </h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">

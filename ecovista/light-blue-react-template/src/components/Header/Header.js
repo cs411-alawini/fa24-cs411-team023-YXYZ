@@ -2,9 +2,6 @@ import { connect } from "react-redux";
 import React from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
-import LinksGroup from '../Sidebar/LinksGroup';
-import {changeActiveSidebarItem} from '../../actions/navigation';
-import HomeIcon from '../Icons/SidebarIcons/HomeIcon';
 import {
   Navbar,
   Nav,
@@ -14,28 +11,16 @@ import {
   InputGroupText,
   InputGroup,
   Input,
-  UncontrolledAlert,
   Dropdown,
   Collapse,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
   Badge,
-  ButtonGroup,
-  Button,
-  Form,
-  FormGroup,
 } from "reactstrap";
 import Notifications from "../Notifications";
 import PowerIcon from "../Icons/HeaderIcons/PowerIcon";
-import BellIcon from "../Icons/HeaderIcons/BellIcon";
-import SettingsIcon from "../Icons/HeaderIcons/SettingsIcon";
-import MessageIcon from "../Icons/HeaderIcons/MessageIcon";
 import BurgerIcon from "../Icons/HeaderIcons/BurgerIcon";
 import SearchIcon from "../Icons/HeaderIcons/SearchIcon";
-import ArrowIcon from "../Icons/HeaderIcons/ArrowIcon";
-
-
 import { logoutUser } from "../../actions/user";
 import {
   openSidebar,
@@ -44,12 +29,7 @@ import {
   changeSidebarVisibility,
 } from "../../actions/navigation";
 
-import sender1 from "../../assets/people/a1.jpg";
-import sender2 from "../../assets/people/a5.jpg";
-import sender3 from "../../assets/people/a4.jpg";
-
 import avatar from "../../assets/people/a7.jpg";
-
 import s from "./Header.module.scss";
 import "animate.css";
 
@@ -94,7 +74,7 @@ class Header extends React.Component {
 
   doLogout() {
     this.props.dispatch(logoutUser());
-    this.props.history.push('/');
+    this.props.history.push("/");
   }
 
   toggleMessagesDropdown() {
@@ -146,26 +126,14 @@ class Header extends React.Component {
       <Navbar className={`d-print-none `}>
         <div className={s.burger}>
           <NavLink
-              onClick={this.toggleSidebar}
-              className={`d-md-none ${s.navItem} text-white`}
-              href="#"
-            >
-              <BurgerIcon className={s.headerIcon} />
-            </NavLink>
+            onClick={this.toggleSidebar}
+            className={`d-md-none ${s.navItem} text-white`}
+            href="#"
+          >
+            <BurgerIcon className={s.headerIcon} />
+          </NavLink>
         </div>
         <div className={`d-print-none ${s.root}`}>
-          {/* <UncontrolledAlert
-            className={`${s.alert} mr-3 d-lg-down-none animate__animated animate__bounceIn animate__delay-1s`}
-          >
-            Check out Light Blue{" "}
-            <button
-              className="btn-link"
-              onClick={() => this.setState({ settingsOpen: true })}
-            >
-              <SettingsIcon className={s.settingsIcon} />
-            </button>{" "}
-            on the right!
-          </UncontrolledAlert> */}
           <Collapse
             className={`${s.searchCollapse} ml-lg-0 mr-md-3`}
             isOpen={this.state.searchOpen}
@@ -189,22 +157,6 @@ class Header extends React.Component {
               />
             </InputGroup>
           </Collapse>
-          {/* <Form className="d-md-down-none mr-3 ml-3" inline>
-            <FormGroup>
-              <InputGroup className={`input-group-no-border ${s.searchForm}`}>
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText className={s.inputGroupText}>
-                    <SearchIcon className={s.headerIcon} />
-                  </InputGroupText>
-                </InputGroupAddon>
-                <Input
-                  id="search-input"
-                  className="input-transparent"
-                  placeholder="Search Dashboard"
-                />
-              </InputGroup>
-            </FormGroup>
-          </Form> */}
 
           <Nav className="ml-md-0">
             <Dropdown
@@ -214,13 +166,19 @@ class Header extends React.Component {
               id="basic-nav-dropdown"
               className={`${s.notificationsMenu}`}
             >
-              <DropdownToggle nav caret style={{ color: "#C1C3CF", padding: 0 }}>
+              <DropdownToggle
+                nav
+                caret
+                style={{ color: "#C1C3CF", padding: 0 }}
+              >
                 <span
                   className={`${s.avatar} rounded-circle thumb-sm float-left`}
                 >
                   <img src={avatar} alt="..." />
                 </span>
-                <span className={`small d-sm-down-none ${s.accountCheck}`}>Philip smith</span>
+                <span className={`small d-sm-down-none ${s.accountCheck}`}>
+                  Philip smith
+                </span>
                 <Badge className={`d-sm-down-none ${s.badge}`} color="danger">
                   9
                 </Badge>
@@ -238,7 +196,7 @@ class Header extends React.Component {
                 className={s.navItem}
                 href="#"
               >
-                <SearchIcon addId='header-search' className={s.headerIcon} />
+                <SearchIcon addId="header-search" className={s.headerIcon} />
               </NavLink>
             </NavItem>
             <NavItem>
