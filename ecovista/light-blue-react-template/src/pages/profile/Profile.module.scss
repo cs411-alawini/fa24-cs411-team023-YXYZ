@@ -1,0 +1,134 @@
+// 引入全局样式（如果需要）
+@import "../../styles/app";
+
+// 定义颜色和通用变量
+$primary-color: #7289da;
+$secondary-color: #4caf50;
+$background-color: #40444b;
+$text-color: #ffffff;
+$input-bg-color: #3f4145;
+$input-focus-bg-color: #484b51;
+$error-color: #ff4d4d;
+$success-color: $secondary-color;
+
+
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.profileBox {
+  background-color: $background-color;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 400px;
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: $text-color;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+.profileForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  label {
+    text-align: left;
+    font-size: 14px;
+    color: lighten($text-color, 20%);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid darken($input-bg-color, 10%);
+    background-color: $input-bg-color;
+    color: $text-color;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+
+    &::placeholder {
+      color: lighten($text-color, 20%);
+    }
+
+    &:focus {
+      background-color: $input-focus-bg-color;
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+}
+
+.profileActions {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: $primary-color;
+  color: $text-color;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    background-color: darken($primary-color, 15%);
+    transform: translateY(0);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.profileBackButton {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: $secondary-color;
+  color: $text-color;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: lighten($secondary-color, 10%);
+    transform: scale(1.05);
+  }
+}
+
+.profileMessage {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+
+  &.error {
+    color: $error-color;
+  }
+
+  &.success {
+    color: $success-color;
+  }
+}

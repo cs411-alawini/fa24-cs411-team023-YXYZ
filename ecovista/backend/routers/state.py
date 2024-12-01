@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import pymysql
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
-from ecovista.backend.utils import db_config
+from utils import db_config
 
 router = APIRouter()
 

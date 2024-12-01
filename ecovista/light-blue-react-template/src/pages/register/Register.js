@@ -71,7 +71,7 @@ class Register extends React.Component {
       const nickname = email.split("@")[0];
 
       axios
-        .post("http://localhost:10000/register", {
+        .post("http://localhost:8000/register", {
           email,
           nickname,
           county_code,
