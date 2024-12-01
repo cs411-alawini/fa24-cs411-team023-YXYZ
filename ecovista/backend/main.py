@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from ecovista.backend.routers.signUp import router as signup_router
 from ecovista.backend.routers.info import router as info_router
+from ecovista.backend.routers.state import router as state_router
 
 
 app = FastAPI()
@@ -15,6 +16,7 @@ app.add_middleware(
 )
 app.include_router(signup_router)
 app.include_router(info_router)
+app.include_router(state_router)
 
 @app.get("/")
 async def root():
