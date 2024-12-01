@@ -22,3 +22,4 @@ app.include_router(profile_router)
 @app.get("/")
 async def root():
     return {"message": "Hello CS411 Applications!"}
+

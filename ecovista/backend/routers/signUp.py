@@ -95,7 +95,7 @@ async def register_user(request: Login, response: Response):
             response.set_cookie(
                 key="user_session",
                 value=str(user["user_id"]),
-                httponly=True,
+                httponly=False,
                 secure=False,
                 samesite="Lax"
             )

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12ebe939-8f68-475d-8797-49a9cb8a1f51" name="Changes" comment="" />
+    <list default="true" id="12ebe939-8f68-475d-8797-49a9cb8a1f51" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/backend/routers/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/routers/profile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/backend/routers/signUp.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/routers/signUp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/components/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.module.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,13 +29,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Simon/Documents/GitHub/fa24-cs411-team023-YXYZ/ecovista/light-blue-react-template"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Simon/Documents/GitHub/fa24-cs411-team023-YXYZ/ecovista/light-blue-react-template&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Simon\Documents\GitHub\fa24-cs411-team023-YXYZ\ecovista\light-blue-react-template" />

@@ -1,4 +1,4 @@
-
+from fastapi.responses import JSONResponse
 from fastapi import APIRouter, Request, Response
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
@@ -17,7 +17,47 @@ class Profile(BaseModel):
 @router.post("/logout", status_code=status.HTTP_200_OK)
 async def logout(response: Response):
     response.delete_cookie(key="user_session", path="/", samesite="Lax")
-    return {"success": True, "message": "Logged out successfully."}
+    return JSONResponse({"message": "Logged out"})
+
+@router.delete("/profile", status_code=status.HTTP_200_OK)
+async def delete_profile(request: Request):
+    user_id = request.cookies.get("user_session")
+    if not user_id:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+    try:
+        connection = pymysql.connect(
+            host=db_config["host"],
+            user=db_config["user"],
+            password=db_config["password"],
+            database=db_config["database"],
+        )
+        print("Connect to DB successfully")
+
+        with connection.cursor() as cursor:
+            #check if the account in database
+            check_query = "SELECT user_id FROM UserProfile WHERE user_id = %s"
+            cursor.execute(check_query, (user_id,))
+            if cursor.fetchone() is None:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="User not found"
+                )
+
+            delete_query = "DELETE FROM UserProfile WHERE user_id = %s"
+            cursor.execute(delete_query, (user_id,))
+            connection.commit()
+        return {"success": True, "message": "Account deleted successfully."}
+
+    except pymysql.MySQLError as e:
+        print(f"Database error: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error"
+        )
+    finally:
+        if "connection" in locals() and connection.open:
+            connection.close()
+
 
 @router.get("/profile", status_code=status.HTTP_200_OK)
 async def get_profile(request: Request):

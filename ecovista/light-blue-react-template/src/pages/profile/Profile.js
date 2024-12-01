@@ -49,6 +49,39 @@ function ProfilePage() {
     }
   };
 
+  const deleteCookie = async(name) => {
+      document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 2000 00:00:00 GMT; SameSite=Lax`;
+    };
+
+  const handleDeleteAccount = async () => {
+  const confirmed = window.confirm(
+    'Please do not leave us.'
+  );
+  if (confirmed) {
+    try {
+      const response = await axios.delete('http://localhost:8000/profile', {
+        withCredentials: true,
+      });
+
+      alert(response.data.message || 'Account deleted successfully.');
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      alert('Failed to delete account. Please try again.');
+    }
+
+    try {
+//        await axios.post('http://localhost:8000/logout', {}, { withCredentials: true });
+        deleteCookie("user_session");
+      } catch (error) {
+
+        console.error('Error deleting account:', error);
+        alert('Failed to delete account. Please try again.');
+      }
+  }
+};
+
+
   return (
     <div className={s.profileContainer}>
       <div className={s.profileBox}>
@@ -100,13 +133,22 @@ function ProfilePage() {
             {message}
           </p>
         )}
-
+        <div>
         <button
           className={s.profileBackButton}
           onClick={() => (window.location.href = '/Dashboard')}
         >
           Back
         </button>
+        </div>
+        <div>
+        <button
+          className={s.deleteAccountButton}
+          onClick={handleDeleteAccount}
+        >
+          Delete Account
+        </button>
+        </div>
       </div>
     </div>
   );
