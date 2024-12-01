@@ -51,34 +51,38 @@ import s from './am4chartMap.module.scss';
     polygonTemplate.stroke = am4core.color("#6979C9")
     polygonTemplate.events.on("hit", async (ev) => {
       const stateName = ev.target.dataItem.dataContext.name;
-      console.log('Clicked state:', stateName);  // Log the state name
-      
-      this.setState({ loading: true, error: null });
-      
-      try {
-        // Encode the state name for URL
-        const encodedStateName = encodeURIComponent(stateName);
-        const response = await fetch(`http://localhost:10000/state?state_name=${encodedStateName}`);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch state data');
-        }
-        
-        const data = await response.json();
-        this.setState({ 
-          stateData: data.state_data,
-          loading: false 
-        });
-        
-        console.log('State Data:', data.state_data);
-        
-      } catch (error) {
-        this.setState({ 
-          error: error.message,
-          loading: false 
-        });
-        console.error('Error fetching state data:', error);
+      // console.log('Clicked state:', stateName);  // Log the state name
+ 
+      if (this.props.onStateClick) {
+        this.props.onStateClick(stateName);
       }
+      // this.setState({ loading: true, error: null });
+      
+      // try {
+      //   // Encode the state name for URL
+      //   const encodedStateName = encodeURIComponent(stateName);
+        
+      //   const response = await fetch(`http://localhost:8000/state?state_name=${encodedStateName}`);
+        
+      //   if (!response.ok) {
+      //     throw new Error('Failed to fetch state data');
+      //   }
+        
+      //   const data = await response.json();
+      //   this.setState({ 
+      //     stateData: data.state_data,
+      //     loading: false 
+      //   });
+        
+      //   console.log('State Data:', data.state_data);
+        
+      // } catch (error) {
+      //   this.setState({ 
+      //     error: error.message,
+      //     loading: false 
+      //   });
+      //   console.error('Error fetching state data:', error);
+      // }
     });
 
 
