@@ -260,39 +260,66 @@ class Static extends React.Component {
   };
 
   handleSearch = (event, searchIndex) => {
+    const value = event.target.value;
+
+    // valid month
+    if (searchIndex === 2) {
+      const isValidMonth = Number.isInteger(Number(value)) && value >= 1 && value <= 12;
+      if (!isValidMonth && value !== "") {
+        this.setState({ error: "Month must be an integer between 1 and 12." });
+        return;
+      } else {
+        this.setState({ error: null }); // Clear error if valid
+      }
+    }
+
+
     this.setState(
       {
-        [`searchText${searchIndex}`]: event.target.value,
-      },
-      () => {
-        // Check if all search fields have values
-        const { searchText1, searchText2, searchText3, searchText4 } =
-          this.state;
-        if (searchText1 && searchText2 && searchText3 && searchText4) {
-          this.performSearch(
-            searchText1,
-            searchText2,
-            searchText3,
-            searchText4
-          );
-        }
+        [`searchText${searchIndex}`]: value,
+        isSearched: true,
       }
     );
   };
 
-  performSearch = (search1, search2, search3, search4) => {
-    // Make the API call to the FastAPI backend
-    fetch(
-      `http://localhost:10000/filter?state=${search1}&year=${search2}&county_code=${search3}&data_type=${search4}`
-    )
+  performSearch = () => {
+    const { searchText1, searchText2, searchText3, searchText4 } = this.state;
+
+    if (!searchText1 && !searchText2 && !searchText3 && !searchText4) {
+      console.warn("At least one search field must have a value.");
+      this.setState({ error: "Please provide at least one search criteria." });
+      return; // Exit the function if all fields are empty
+    }
+
+    // valid data type
+    if (!this.state.searchText4 || this.state.searchText4.trim() === "") {
+      this.setState({ error: "Please select a data type" });
+      return;
+    }
+
+    this.setState({ error: null });
+  
+    // Construct the query parameters dynamically
+    const params = new URLSearchParams();
+    if (searchText1) params.append("state", searchText1); // State
+    if (searchText2) params.append("month", searchText2); // Month
+    if (searchText3) params.append("county_name", searchText3); // County
+    if (searchText4) params.append("data_type", searchText4); // Data Type
+  
+    // Build the full URL with the query parameters
+    const query = params.toString();
+    const url = `http://localhost:8000/filter?${query}`;
+  
+    // Make the API call
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // Handle the search results from the backend
         this.setState({ searchResults: data.data });
         console.log(data.results);
       })
       .catch((error) => {
         console.error("Error performing search:", error);
+        this.setState({ error: "Failed to fetch data. Please try again." });
       });
   };
 
@@ -328,6 +355,24 @@ class Static extends React.Component {
   render() {
     return (
       <div className={s.root}>
+        <Row>
+          <Col>
+            {this.state.error && (
+              <div 
+                style={{
+                  backgroundColor: "#f8d7da", // Custom background color (light red)
+                  color: "#721c24",          // Custom text color (dark red)
+                  padding: "10px",
+                  borderRadius: "5px",
+                }}
+               role="alert"
+              >
+                {this.state.error}
+              </div>
+            )}
+          </Col>
+        </Row>
+        
         <Row className="mb-3">
           <Col lg={3} md={6} sm={12}>
             <Form className="d-md-down-none mr-3 ml-3" inline>
@@ -361,7 +406,7 @@ class Static extends React.Component {
                   <Input
                     id="search-input-2"
                     className="input-transparent"
-                    placeholder="Enter Year..."
+                    placeholder="Enter Month..."
                     value={this.state.searchText2}
                     onChange={(event) => this.handleSearch(event, 2)}
                   />
@@ -381,7 +426,7 @@ class Static extends React.Component {
                   <Input
                     id="search-input-3"
                     className="input-transparent"
-                    placeholder="Enter County Code..."
+                    placeholder="Enter County Name..."
                     value={this.state.searchText3}
                     onChange={(event) => this.handleSearch(event, 3)}
                   />
@@ -391,10 +436,10 @@ class Static extends React.Component {
           </Col>
           <Col lg={3} md={6} sm={12}>
             <UncontrolledButtonDropdown>
-              <DropdownToggle caret>
+              <DropdownToggle caret color="primary">
                 {this.state.searchText4 || "Select Data Type"}
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu className="custom-dropdown-menu">
                 <DropdownItem
                   onClick={(event) =>
                     this.handleDropdownChange(event, "Air Quality")
@@ -422,6 +467,17 @@ class Static extends React.Component {
               </DropdownMenu>
             </UncontrolledButtonDropdown>
           </Col>
+          <Row>
+            <Col lg={3} md={6} sm={12} className="text-center mt-3">
+              <button
+                className="btn btn-primary"
+                style={{ width: "100%" }}
+                onClick={() => this.performSearch()}
+              >
+                Search
+              </button>
+            </Col>
+          </Row>
         </Row>
         <Row>
           <Col lg={6} md={12} sm={12}>
@@ -430,7 +486,8 @@ class Static extends React.Component {
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>County Code</th>
+                    <th>State</th>
+                    <th>County Name</th>
                     <th>Time</th>
                     <th>{this.state.searchText4 || "Value"}</th>
                   </tr>
@@ -446,7 +503,8 @@ class Static extends React.Component {
                     return (
                       <tr key={index}>
                         <td>{index + 1}</td>
-                        <td>{result.county_code}</td>
+                        <td>{result.state}</td>
+                        <td>{result.county_name}</td>
                         <td>{result.timestamp}</td>
                         <td>
                           <Badge

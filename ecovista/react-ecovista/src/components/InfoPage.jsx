@@ -14,7 +14,7 @@ function InfoPage() {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('http://localhost:10000/filter', {
+      const response = await axios.get('http://localhost:8000/filter', {
         params: {
           state,
           year,
