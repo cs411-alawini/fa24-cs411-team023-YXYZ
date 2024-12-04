@@ -16,6 +16,15 @@ import {
 import Widget from "../../components/Widget";
 import microsoft from "../../assets/microsoft.png";
 
+function exportToAnotherFile(loginTimeData) {
+  console.log("Exporting to another file:", loginTimeData);
+
+  // Pass the data to another module or component
+  // You can use global variables, shared state, or localStorage as needed
+  localStorage.setItem("lastLoginTime", JSON.stringify(loginTimeData));
+}
+
+
 class Login extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -65,6 +74,24 @@ class Login extends React.Component {
         const data = await response.json();
         alert(data.message);
         // Redirect to dashboard or homepage
+        const loginTimeResponse = await fetch("http://localhost:8000/log-login-time", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: data.user_id, // User ID from the login response
+            loginTime: new Date().toISOString(), // Current time
+          }),
+        });
+  
+        if (loginTimeResponse.ok) {
+          const loginTimeData = await loginTimeResponse.json();
+          console.log("Login time updated successfully.");
+          this.handleLoginTime(loginTimeData);
+        } else {
+          console.error("Failed to update login time.");
+        }
         this.props.history.push("/dashboard");
       } else {
         const errorData = await response.json();
@@ -74,6 +101,16 @@ class Login extends React.Component {
       this.setState({ error: "An error occurred. Please try again later." });
     }
   }
+
+  handleLoginTime(loginTimeData) {
+    // Example: Save it to a global state, export it, or log it
+    console.log("Handling Login Time Data:", loginTimeData);
+  
+    // If you want to pass it to another file
+    exportToAnotherFile(loginTimeData);
+  }
+  
+  // Example of exporting to another file
 
   signUp() {
     this.props.history.push("/register");

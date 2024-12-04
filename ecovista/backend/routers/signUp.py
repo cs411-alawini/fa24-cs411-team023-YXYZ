@@ -23,6 +23,9 @@ class Login(BaseModel):
     email: str
     password: str
 
+class LoginTimeRequest(BaseModel):
+    userId: int
+    loginTime: str
 
 # SignUp Endpoint
 @router.post("/register", status_code=status.HTTP_201_CREATED)
@@ -107,6 +110,60 @@ async def register_user(request: Login, response: Response):
                 "user_county_code": user["county_code"],
                 "message": "Login successful.",
             }
+
+    except pymysql.MySQLError as e:
+        print(f"Error connecting to MySQL Database: {e}")
+    finally:
+        if "connection" in locals() and connection.open:
+            connection.close()
+
+
+@router.post("/log-login-time")
+async def log_login_time(request: LoginTimeRequest, response: Response):
+    print("log login time")
+    print(request)
+    connection = None
+    cursor = None
+    try:
+        connection = pymysql.connect(
+            host=db_config["host"],
+            user=db_config["user"],
+            password=db_config["password"],
+            database=db_config["database"],
+        )
+        print("成功连接到数据库 log login time")
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        # Update `last_login` in UserProfile
+        update_query = """
+        UPDATE UserProfile
+        SET timestamp = NOW()
+        WHERE user_id = %s;
+        """
+        cursor.execute(update_query, (request.userId,))
+        connection.commit()
+
+        # Retrieve the updated `last_login` timestamp
+        cursor.execute("SELECT timestamp FROM UserProfile WHERE user_id = %s", (request.userId,))
+        updated_user = cursor.fetchone()
+
+        if not updated_user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        # Set cookie for session management
+        response.set_cookie(
+            key="user_session",
+            value=str(request.userId),
+            httponly=False,
+            secure=False,
+            samesite="Lax",
+        )
+
+        return {
+            "success": True,
+            "user_id": request.userId,
+            "last_login": updated_user["timestamp"],
+            "message": "Last Login successful.",
+        }
 
     except pymysql.MySQLError as e:
         print(f"Error connecting to MySQL Database: {e}")

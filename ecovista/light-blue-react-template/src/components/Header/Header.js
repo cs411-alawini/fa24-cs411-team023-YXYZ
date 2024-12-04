@@ -33,6 +33,22 @@ import avatar from "../../assets/people/a7.jpg";
 import s from "./Header.module.scss";
 import "animate.css";
 
+function retrieveLoginTime() {
+  // Get the data from localStorage
+  const loginTimeData = localStorage.getItem("lastLoginTime");
+
+  if (loginTimeData) {
+    // Parse the JSON string back into an object
+    const parsedData = JSON.parse(loginTimeData);
+    console.log("Retrieved Login Time Data:", parsedData);
+
+    // Use the data (e.g., display it in the UI)
+    document.getElementById("lastLoginTime").textContent = `Last Login: ${parsedData.last_login}`;
+  } else {
+    console.log("No login time data found in localStorage.");
+  }
+}
+const loginTime = retrieveLoginTime();
 class Header extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -196,6 +212,7 @@ class Header extends React.Component {
                 <span className={`small d-sm-down-none ${s.accountCheck}`}>
                   Philip smith
                 </span>
+                <div id="lastLoginTime" className="small text-muted"></div>
                 <Badge className={`d-sm-down-none ${s.badge}`} color="danger">
                   9
                 </Badge>
