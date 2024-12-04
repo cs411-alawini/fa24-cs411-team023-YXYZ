@@ -81,7 +81,7 @@ class Login extends React.Component {
           },
           body: JSON.stringify({
             userId: data.user_id, // User ID from the login response
-            loginTime: new Date().toISOString(), // Current time
+            loginTime: new Date(), // Current time
           }),
         });
   

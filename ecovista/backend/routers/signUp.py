@@ -120,7 +120,6 @@ async def register_user(request: Login, response: Response):
 
 @router.post("/log-login-time")
 async def log_login_time(request: LoginTimeRequest, response: Response):
-    print("log login time")
     print(request)
     connection = None
     cursor = None
@@ -139,10 +138,12 @@ async def log_login_time(request: LoginTimeRequest, response: Response):
         SET timestamp = NOW()
         WHERE user_id = %s;
         """
+        print("log login time update")
         cursor.execute(update_query, (request.userId,))
         connection.commit()
 
         # Retrieve the updated `last_login` timestamp
+        print("log login time SELECT")
         cursor.execute("SELECT timestamp FROM UserProfile WHERE user_id = %s", (request.userId,))
         updated_user = cursor.fetchone()
 

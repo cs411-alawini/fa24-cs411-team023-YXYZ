@@ -36,19 +36,33 @@ import "animate.css";
 function retrieveLoginTime() {
   // Get the data from localStorage
   const loginTimeData = localStorage.getItem("lastLoginTime");
-
+  const lastLoginTimeElement = document.getElementById("lastLoginTime");
   if (loginTimeData) {
     // Parse the JSON string back into an object
     const parsedData = JSON.parse(loginTimeData);
     console.log("Retrieved Login Time Data:", parsedData);
 
     // Use the data (e.g., display it in the UI)
-    document.getElementById("lastLoginTime").textContent = `Last Login: ${parsedData.last_login}`;
+    // document.getElementById("lastLoginTime").textContent = `Last Login: ${parsedData.last_login}`;
+    const lastLoginDate = new Date(parsedData.last_login);
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "America/Chicago", timeZoneName: "short" 
+    }).format(lastLoginDate);
+
+    // Set the formatted date with the time zone
+    lastLoginTimeElement.textContent = formattedDate;
+    console.log(loginTimeData);
   } else {
     console.log("No login time data found in localStorage.");
   }
 }
-const loginTime = retrieveLoginTime();
+
 class Header extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -152,6 +166,10 @@ class Header extends React.Component {
   toggleVisibilitySidebar(visibility) {
     this.props.dispatch(changeSidebarVisibility(visibility));
   }
+  componentDidMount() {
+    retrieveLoginTime(); // Call after component is mounted
+  }
+
 
   render() {
     return (
@@ -211,8 +229,9 @@ class Header extends React.Component {
                 </span>
                 <span className={`small d-sm-down-none ${s.accountCheck}`}>
                   Philip smith
+                  <div id="lastLoginTime" className="last-login-time"></div>
                 </span>
-                <div id="lastLoginTime" className="small text-muted"></div>
+               
                 <Badge className={`d-sm-down-none ${s.badge}`} color="danger">
                   9
                 </Badge>
