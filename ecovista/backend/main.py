@@ -4,6 +4,7 @@ from routers.signUp import router as signup_router
 from routers.info import router as info_router
 from routers.state import router as state_router
 from routers.profile import router as profile_router
+from typing import Optional
 
 app = FastAPI()
 
