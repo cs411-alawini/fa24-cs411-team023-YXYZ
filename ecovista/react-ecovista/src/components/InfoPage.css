@@ -151,6 +151,16 @@ html, body {
     font-size: 14px;
   }
   
+  .filter-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: auto; /* Aligns with input vertically */
+  }
   .info-result-table {
     background-color: white;
     padding: 8px;
