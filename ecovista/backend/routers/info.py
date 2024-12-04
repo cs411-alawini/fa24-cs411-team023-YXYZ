@@ -6,8 +6,7 @@ import pymysql
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import APIRouter
-from ecovista.backend.utils import db_config
-from typing import Optional
+from utils import db_config
 
 router = APIRouter()
 table_name_map = {

@@ -12,6 +12,7 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Tables from "../pages/tables/static/Static";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Profile from "../pages/profile/Profile";
 import { logoutUser } from "../actions/user";
 
 const CloseButton = ({ closeToast }) => (
@@ -32,6 +33,7 @@ class App extends React.PureComponent {
             <Route exact path="/" component={HomePage} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
+            <Route path="/profile" exact component={Profile} />
             <Route path="/error" exact component={ErrorPage} />
 
             <Route
@@ -48,6 +50,15 @@ class App extends React.PureComponent {
               render={(props) => (
                 <Layout>
                   <Dashboard {...props} />
+                </Layout>
+              )}
+            />
+
+            <Route
+              path="/profile"
+              render={(props) => (
+                <Layout>
+                  <Profile {...props} />
                 </Layout>
               )}
             />

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 import {
@@ -28,7 +28,7 @@ import {
   changeSidebarPosition,
   changeSidebarVisibility,
 } from "../../actions/navigation";
-
+import axios from 'axios';
 import avatar from "../../assets/people/a7.jpg";
 import s from "./Header.module.scss";
 import "animate.css";
@@ -72,10 +72,26 @@ class Header extends React.Component {
     this.setState({ visible: false });
   }
 
-  doLogout() {
-    this.props.dispatch(logoutUser());
-    this.props.history.push("/");
-  }
+//  doLogout() {
+//    this.props.dispatch(logoutUser());
+//    this.props.history.push("/logout");
+//  }
+    deleteCookie = (name) => {
+      document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 2000 00:00:00 GMT; SameSite=Lax`;
+    };
+
+    doLogout = async () => {
+      try {
+        this.props.dispatch(logoutUser());
+//        await axios.post('http://localhost:8000/logout', {}, { withCredentials: true });
+        this.deleteCookie("user_session");
+        this.props.history.push('/');
+      } catch (error) {
+        console.error('Logout failed:', error);
+
+        this.props.history.push('/error');
+      }
+    };
 
   toggleMessagesDropdown() {
     this.setState({
@@ -173,6 +189,7 @@ class Header extends React.Component {
               >
                 <span
                   className={`${s.avatar} rounded-circle thumb-sm float-left`}
+                  onClick={() => (window.location.href = '/profile')}
                 >
                   <img src={avatar} alt="..." />
                 </span>

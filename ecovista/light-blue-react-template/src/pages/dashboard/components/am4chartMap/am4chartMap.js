@@ -49,6 +49,43 @@ import s from './am4chartMap.module.scss';
     polygonTemplate.tooltipText = "{name}";
     polygonTemplate.fill = am4core.color("#474D84");
     polygonTemplate.stroke = am4core.color("#6979C9")
+    polygonTemplate.events.on("hit", async (ev) => {
+      const stateName = ev.target.dataItem.dataContext.name;
+      // console.log('Clicked state:', stateName);  // Log the state name
+ 
+      if (this.props.onStateClick) {
+        this.props.onStateClick(stateName);
+      }
+      // this.setState({ loading: true, error: null });
+      
+      // try {
+      //   // Encode the state name for URL
+      //   const encodedStateName = encodeURIComponent(stateName);
+        
+      //   const response = await fetch(`http://localhost:8000/state?state_name=${encodedStateName}`);
+        
+      //   if (!response.ok) {
+      //     throw new Error('Failed to fetch state data');
+      //   }
+        
+      //   const data = await response.json();
+      //   this.setState({ 
+      //     stateData: data.state_data,
+      //     loading: false 
+      //   });
+        
+      //   console.log('State Data:', data.state_data);
+        
+      // } catch (error) {
+      //   this.setState({ 
+      //     error: error.message,
+      //     loading: false 
+      //   });
+      //   console.error('Error fetching state data:', error);
+      // }
+    });
+
+
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = am4core.color("#354D84");
     let citySeries = map.series.push(new am4maps.MapImageSeries());

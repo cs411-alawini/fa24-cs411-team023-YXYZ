@@ -1,0 +1,6 @@
+Description for table: Location_backup
+Field               Type                Null      Key       Default        Extra     
+-------------------------------------------------------------------------------------
+county_code         int                 NO                                           
+state               varchar(100)        YES                                          
+county_name         varchar(100)        YES                                          

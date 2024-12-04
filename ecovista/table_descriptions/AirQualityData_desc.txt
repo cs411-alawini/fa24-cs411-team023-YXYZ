@@ -1,0 +1,6 @@
+Description for table: AirQualityData
+Field               Type                Null      Key       Default        Extra     
+-------------------------------------------------------------------------------------
+county_code         int                 NO        PRI                                
+timestamp           varchar(7)          NO        PRI                                
+aqi                 decimal(5,3)        YES       MUL                                
