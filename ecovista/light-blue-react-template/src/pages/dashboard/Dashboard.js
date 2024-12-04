@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
         {/* Map 组件 */}
         <Widget className="bg-transparent">
         
-          <Map onStateClick={this.handleStateClick} />
+          <Map key={Date.now()} onStateClick={this.handleStateClick} />
           {/* <Map
             key={Date.now()}
             onStateClick={(data) =>
