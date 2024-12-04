@@ -1,0 +1,93 @@
+/* 基本的HTML和body设置，确保整个页面没有默认边距 */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: transparent;
+}
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  
+  /* 面板样式 */
+  .panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  /* 标题样式 */
+  .title {
+    font-size: max(24px, min(4vw, 48px));  /* 字体大小介于24px和48px之间，根据视窗宽度调整 */
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* 描述文本样式 */
+  .description {
+    font-size: max(16px, min(1.5vw, 24px));  /* 字体大小介于16px和24px之间，根据视窗宽度调整 */
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  /* 开始按钮样式 */
+  .start-button {
+    font-size: max(12px, min(2vw, 20px)); /* 字体大小介于12px和20px之间，根据视窗宽度调整 */
+    padding: 5px 10px;
+    background-color: #0ac35d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .start-button:hover {
+    background-color: #55de0c;
+  }
+  
+  /* 媒体查询，用于小屏幕上调整面板宽度 */
+  @media (max-width: 768px) {
+    .panel {
+      width: 80%; /* 在小屏幕上面板宽度为80% */
+    }
+  }
+
+  .welcome-create-chat-btn {
+    padding: 12px 24px;
+    background-color: #7289da;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: max(12px, min(2vw, 20px)); /* 字体大小介于12px和20px之间，根据视窗宽度调整 */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: auto;  
+    margin: 0 auto; 
+}
+
+  

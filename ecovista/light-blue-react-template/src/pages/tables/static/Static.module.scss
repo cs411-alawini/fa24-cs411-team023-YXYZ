@@ -1,0 +1,26 @@
+@import "../../../styles/app";
+
+.root {
+}
+
+.overFlow {
+  overflow-x: auto;
+}
+
+.mainTableWidget {
+  :global {
+    .table td {
+      border: none;
+    }
+  }
+
+}
+.custom-dropdown-menu {
+  background-color: #007bff; // Use SCSS variables if available
+  border: 1px solid #ccc;
+}
+
+.custom-dropdown-menu .dropdown-item:hover {
+  background-color: #007bff;
+  color: #fff;
+}

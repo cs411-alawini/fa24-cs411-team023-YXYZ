@@ -53,8 +53,9 @@ function InfoPage() {
 
   const handleApplyFilter = async () => {
     try {
-      console.log('Applying filter with:', filterText, yearRange, selectedDataType);
-      const response = await axios.get('http://localhost:10000/filter', {
+
+      const response = await axios.get('http://localhost:8000/filter', {
+
         params: {
           state: filterText,
           year: yearRange,
