@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12ebe939-8f68-475d-8797-49a9cb8a1f51" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ecovista/backend/procedure.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/backend/routers/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/routers/profile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/backend/routers/signUp.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/routers/signUp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/components/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/light-blue-react-template/src/pages/profile/Profile.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/backend/routers/info.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/routers/info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

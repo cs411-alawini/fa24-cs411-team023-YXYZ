@@ -29,6 +29,54 @@ data_type_map = {
 #     county_code: str
 #     data_type: str
 
+@router.get("/worse_states")
+async def worse_states(month:str = Query(...)):
+
+    connection = None
+    try:
+        if not month or len(month) != 7 or not month[:4].isdigit() or month[4] != '-' or not month[5:].isdigit():
+           raise HTTPException(status_code=400, detail="Invalid month format. Use YYYY-MM.")
+        connection = pymysql.connect(
+            host=db_config["host"],
+            user=db_config["user"],
+            password=db_config["password"],
+            database=db_config["database"],
+        )
+        cursor = connection.cursor()
+
+        cursor.execute("DROP PROCEDURE IF EXISTS GETSTATESCORE;")
+        connection.commit()
+
+        with open("procedure.sql", "r", encoding="utf-8") as file:
+            sql_script = file.read()
+
+        cursor.execute(sql_script)
+        connection.commit()
+
+        print("Stored procedures loaded successfully.")
+
+        cursor.callproc('GETSTATESCORE', (month,))
+        results = cursor.fetchall()
+
+        if not results:
+            return {
+                "success": False,
+                "message": "No data",
+                "data": []
+            }
+
+        return {
+            "success": True,
+            "message": "Select state successfully.",
+            "data": results,
+        }
+
+    except pymysql.MySQLError as e:
+        print(f"MySQL Error: {e}")
+        raise
+    finally:
+        if connection and connection.open:
+            connection.close()
 
 @router.get("/filter")
 async def filter(
