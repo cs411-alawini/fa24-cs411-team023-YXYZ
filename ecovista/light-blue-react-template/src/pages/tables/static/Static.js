@@ -233,9 +233,9 @@ class Static extends React.Component {
       searchText3: "",
       searchText4: "",
       searchResults: [],
-      searchMonth: "", // 用于存储年份+月份
-      statesList: [], // 存储返回的州列表
-      error: "", // 存储错误信息
+      searchMonth: "", 
+      statesList: [], 
+      error: "", 
     };
     this.checkAll = this.checkAll.bind(this);
 
@@ -245,17 +245,17 @@ class Static extends React.Component {
     this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleWorseSearch = this.handleWorseSearch.bind(this);
   }
-  // 处理月份输入变化
+
   handleMonthChange(event) {
     const value = event.target.value;
     this.setState({ searchMonth: value });
   }
 
-  // 搜索按钮点击事件
+
   handleWorseSearch() {
     const { searchMonth } = this.state;
 
-    // 验证输入格式 YYYY-MM
+
     const regex = /^\d{4}-(0[1-9]|1[0-2])$/;
     if (!regex.test(searchMonth)) {
       this.setState({ 
@@ -273,9 +273,9 @@ class Static extends React.Component {
       return;
     }
 
-    this.setState({ error: "" }); // 清除错误信息
+    this.setState({ error: "" });
 
-    // 调用后端
+
     fetch(`http://localhost:8000/worse_states?month=${searchMonth}`)
       .then((response) => response.json())
       .then((data) => {
@@ -589,6 +589,7 @@ class Static extends React.Component {
             </div>
           </Col>
         </Row>
+        
         <Row className="mt-5">
           <Col lg={6} md={8} sm={12}>
             <Input
@@ -607,6 +608,13 @@ class Static extends React.Component {
             >
               Search Worse States
             </button>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col lg={12}>
+            <p style={{ fontSize: "14px", color: "#666" }}>
+              Enter a year and month (YYYY-MM) to analyze environmental data. The system returns the top 10 states with the lowest average scores.
+            </p>
           </Col>
         </Row>
         <Row>

@@ -48,11 +48,11 @@ state_name_to_abbreviation = {
 async def worse_states(month: str = Query(...)):
     connection = None
     try:
-        # 检查月份格式
+       
         if not month or len(month) != 7 or not month[:4].isdigit() or month[4] != '-' or not month[5:].isdigit():
             raise HTTPException(status_code=400, detail="Invalid month format. Use YYYY-MM.")
         
-        # 连接数据库
+    
         connection = pymysql.connect(
             host=db_config["host"],
             user=db_config["user"],
@@ -61,7 +61,7 @@ async def worse_states(month: str = Query(...)):
         )
         cursor = connection.cursor()
 
-        # 加载存储过程
+   
         cursor.execute("DROP PROCEDURE IF EXISTS GETSTATESCORE;")
         connection.commit()
 
@@ -73,7 +73,7 @@ async def worse_states(month: str = Query(...)):
 
         print("Stored procedures loaded successfully.")
 
-        # 调用存储过程
+
         cursor.callproc('GETSTATESCORE', (month,))
         results = cursor.fetchall()
 
@@ -84,11 +84,11 @@ async def worse_states(month: str = Query(...)):
                 "data": []
             }
 
-        # 转换州简称为全称
-        state_abbreviation_to_name = {v: k for k, v in state_name_to_abbreviation.items()}  # 反转映射
+
+        state_abbreviation_to_name = {v: k for k, v in state_name_to_abbreviation.items()}  
         formatted_results = []
         for row in results:
-            state_abbr = row[0]  # 假设第一列是州的简称
+            state_abbr = row[0] 
             if state_abbr in state_abbreviation_to_name:
                 formatted_results.append(state_abbreviation_to_name[state_abbr])
 
