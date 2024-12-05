@@ -14,6 +14,7 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
+  Button
 } from "reactstrap";
 import SearchIcon from "../../../components/Icons/HeaderIcons/SearchIcon";
 import s from "./Static.module.scss";
@@ -232,12 +233,64 @@ class Static extends React.Component {
       searchText3: "",
       searchText4: "",
       searchResults: [],
+      searchMonth: "", // 用于存储年份+月份
+      statesList: [], // 存储返回的州列表
+      error: "", // 存储错误信息
     };
     this.checkAll = this.checkAll.bind(this);
 
     this.handleSearch = this.handleSearch.bind(this);
     this.performSearch = this.performSearch.bind(this);
+
+    this.handleMonthChange = this.handleMonthChange.bind(this);
+    this.handleWorseSearch = this.handleWorseSearch.bind(this);
   }
+  // 处理月份输入变化
+  handleMonthChange(event) {
+    const value = event.target.value;
+    this.setState({ searchMonth: value });
+  }
+
+  // 搜索按钮点击事件
+  handleWorseSearch() {
+    const { searchMonth } = this.state;
+
+    // 验证输入格式 YYYY-MM
+    const regex = /^\d{4}-(0[1-9]|1[0-2])$/;
+    if (!regex.test(searchMonth)) {
+      this.setState({ 
+        error: "Invalid format. Please use YYYY-MM.",
+        statesList: []
+       });
+      return;
+    }
+
+    if (searchMonth.endsWith("-01")) {
+      this.setState({
+        error: "No Data.",
+        statesList: []
+      });
+      return;
+    }
+
+    this.setState({ error: "" }); // 清除错误信息
+
+    // 调用后端
+    fetch(`http://localhost:8000/worse_states?month=${searchMonth}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          this.setState({ statesList: data.data, error: "" });
+        } else {
+          this.setState({ error: data.message || "Failed to fetch data." });
+        }
+      })
+      .catch((error) => {
+        this.setState({ error: "Error fetching data. Please try again." });
+        console.error("Error:", error);
+      });
+  }
+
   handleDropdownChange = (event, selectedValue) => {
     this.setState(
       {
@@ -534,6 +587,53 @@ class Static extends React.Component {
               </Table>
               {this.state.searchText4 && renderLegend(this.state.searchText4)}
             </div>
+          </Col>
+        </Row>
+        <Row className="mt-5">
+          <Col lg={6} md={8} sm={12}>
+            <Input
+              type="text"
+              className="input-transparent"
+              placeholder="Enter Year-Month (YYYY-MM)"
+              value={this.state.searchMonth}
+              onChange={(e) => this.setState({ searchMonth: e.target.value })}
+            />
+          </Col>
+          <Col lg={2} md={4} sm={12}>
+            <button
+              className="btn btn-primary"
+              style={{ width: "100%" }}
+              onClick={this.handleWorseSearch}
+            >
+              Search Worse States
+            </button>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={6} md={12} sm={12}>
+            <Table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.statesList.map((state, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{state}</td>
+                  </tr>
+                ))}
+                {this.state.statesList.length === 0 && (
+                  <tr>
+                    <td colSpan="2" className="text-center">
+                      No states found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
           </Col>
         </Row>
       </div>
