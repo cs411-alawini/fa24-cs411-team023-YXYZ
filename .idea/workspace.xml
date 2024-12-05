@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12ebe939-8f68-475d-8797-49a9cb8a1f51" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ecovista/backend/procedure.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecovista/backend/routers/info.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/routers/info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecovista/backend/procedure.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecovista/backend/procedure.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

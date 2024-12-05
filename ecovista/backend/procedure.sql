@@ -37,7 +37,8 @@ BEGIN
             WHERE AQI.timestamp BETWEEN SelectedMonth AND SelectedMonth
             GROUP BY L.state
             HAVING AVG(AQI.aqi) > MAX(AQI_Previous.avg_aqi_previous)
-            ORDER BY L.state;
+            ORDER BY L.state
+            LIMIT 10;
         ELSE
             SELECT 'No Data' AS message;
         END IF;
