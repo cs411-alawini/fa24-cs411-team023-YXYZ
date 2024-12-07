@@ -16,6 +16,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   Badge,
+  Button,
 } from "reactstrap";
 import Notifications from "../Notifications";
 import PowerIcon from "../Icons/HeaderIcons/PowerIcon";
@@ -59,6 +60,7 @@ class Header extends React.Component {
       searchFocused: false,
       searchOpen: false,
       notificationsOpen: false,
+      notificationMessage: "",
     };
   }
 
@@ -137,9 +139,48 @@ class Header extends React.Component {
     this.props.dispatch(changeSidebarVisibility(visibility));
   }
 
+
+
+  handleNotify = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/notify',{
+        method: 'POST',
+        credentials: "include",
+      });
+
+
+      if (response.ok) {
+        const data = await response.json();
+        this.setState({ notificationMessage: data.message }); // Update the message state
+      } else {
+        this.setState({ notificationMessage: 'Failed to notify users.' });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      this.setState({ notificationMessage: 'An error occurred while notifying users.' });
+    }
+  };
+
+
+
+
   render() {
     return (
+      
       <Navbar className={`d-print-none `}>
+        <Button
+          color="primary"
+          onClick={this.handleNotify}
+          className={`${s.navItem} text-white`}
+        >
+          Update Notification
+        </Button>
+        <span
+          className={`${s.navItem} ml-2`}
+          style={{ fontSize: '0.85rem', color: 'white' }}
+        >
+          {this.state?.notificationMessage || ''}
+        </span>
         <div className={s.burger}>
           <NavLink
             onClick={this.toggleSidebar}
@@ -149,6 +190,7 @@ class Header extends React.Component {
             <BurgerIcon className={s.headerIcon} />
           </NavLink>
         </div>
+        
         <div className={`d-print-none ${s.root}`}>
           <Collapse
             className={`${s.searchCollapse} ml-lg-0 mr-md-3`}
@@ -173,6 +215,7 @@ class Header extends React.Component {
               />
             </InputGroup>
           </Collapse>
+          
 
           <Nav className="ml-md-0">
             <Dropdown
@@ -207,6 +250,7 @@ class Header extends React.Component {
                 <Notifications />
               </DropdownMenu>
             </Dropdown>
+            
             <NavItem className="d-lg-none">
               <NavLink
                 onClick={this.toggleSearchOpen}
